@@ -32,7 +32,7 @@ namespace Lib.Dal
         void RemoveReservationFromApartment(int reservationID, int apartmentID);
         int AddReservationToApartment(string username, string details, int apartmentID);
         void SetReserved(int apartmentID);
-        object GetApartmentById(int apartmentID);
+        Apartment GetApartmentById(int apartmentID);
         Apartment GetApartment(string name, string owner, string address);
     }
 }

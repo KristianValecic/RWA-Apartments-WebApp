@@ -9,6 +9,12 @@ Promijeniti imena dohvacenih podat na NameEng
 ---------------------------------------------------------------------
 ISTESTIRAJ WEB.FORMS OPET RADI LI SVE
 
+Dodavanje rezervacija
+
+ajax search
+
+spremanje u cookie kako je korisnik spremao prije
+
 pogledaj vjezbe11 kako se salje userid
 
 User dio  MVC
@@ -32,7 +38,7 @@ apartmanu (reprezentativna slika, udaljenost od mora, galerija slika, tagovi...)
 prikazano na slici 4
 
 10. Na stranici s apartmanima implementirati foto-galeriju s mogućnošću otvaranja
-pojedine slike preko ekrana; ovdje iskoristite AJAX tehniku
+pojedine slike preko ekrana; ovdje iskoristite AJAX tehniku (fancybox)
 
 11.Na stranici s detaljima nalazi se kontakt forma i gumb "Pošalji upit" (ili "Rezerviraj")
 koji omogućuje korisniku navedenu funkcionalnost. Forma treba biti unaprijed
@@ -44,5 +50,3 @@ CAPTCHA ili sličnu zaštitu protiv botova. Iskoristite AJAX tehniku kod slanja 
 12.Implementirati interakciju za korisnike koji su prijavljeni: ostavljanje ocjene, unos
 recenzije; ovdje iskoristite AJAX tehniku
 
-13. Neke od navedenih funkcionalnosti nisu prikazane slikama i potrebno ih je
-implementirati na način da budu vizualno konzistentne s ostatkom sučelja

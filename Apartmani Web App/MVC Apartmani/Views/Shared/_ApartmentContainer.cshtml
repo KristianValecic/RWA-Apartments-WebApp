@@ -1,32 +1,28 @@
 ﻿@model Lib.Models.Apartment
 
 @using (Html.BeginForm(controllerName: "Home", actionName: "SelectApartment", htmlAttributes: new { id = "formAparts" }, routeValues: new { id = Model.ID }, method: FormMethod.Get))
-@*@using (Html.ActionLink(actionName: "SelectApartment", controllerName: "home"))*@
 {
-    @*@Html.HiddenFor(model => model.ID)*@
-    <div class="p-2">
-        <div class="row">
-            <p>* * * * *</p>
-        </div>
-        <div class="row">
-            <div class="col">
-                <img src="#" alt="representative img" />
+    <button>
+        <div class="p-2">
+            <div class="row">
+                <p>* * * * *</p>
             </div>
-            <div class="col">
+            <div class="row">
                 <div class="col">
+                    <img src="#" alt="representative img" />
+                </div>
+                <div class="col"> 
                     <h5><b>@Html.DisplayFor(model => model.Name)</b></h5>
-
                     <ul>
-                        <li> @Html.DisplayFor(model => model.City)</li>
-                        <li> @Html.DisplayFor(model => model.BeachDistance)</li>
-                        <li> @Html.DisplayFor(model => model.TotalRooms)</li>
-                        <li> @Html.DisplayFor(model => model.MaxAdults)</li>
-                        <li> @Html.DisplayFor(model => model.MaxChildren)</li>
+                        <li>Grad:  @Html.DisplayFor(model => model.City)</li>
+                        <li>Beach distance: @Html.DisplayFor(model => model.BeachDistance)</li>
+                        <li>Rooms: @Html.DisplayFor(model => model.TotalRooms)</li>
+                        <li>Max adults: @Html.DisplayFor(model => model.MaxAdults)</li>
+                        <li>Max children: @Html.DisplayFor(model => model.MaxChildren)</li>
                     </ul>
-
-                    <p> @Html.DisplayFor(model => model.Price)€</p>
+                    <p> @Html.DisplayFor(model => model.Price)€</p>                    
                 </div>
             </div>
         </div>
-    </div>
+    </button>
 }

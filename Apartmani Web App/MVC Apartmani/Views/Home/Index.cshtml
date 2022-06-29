@@ -9,6 +9,7 @@
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
 </p>
+
 <div id="homeApartContainer" class="flex-wrap">
 
     @foreach (var item in Model)
@@ -16,13 +17,3 @@
         @Html.Partial(partialViewName: "_ApartmentContainer", model: item)
     }
 </div>
-
-@section scripts{
-    <script>
-        $("#formAparts > div").click(e => console.log(e/*$("#formAparts").attr("action")*/))
-
-        $("#formAparts > div").click(e => $(e).submit())
-        /*$("#formAparts").submit()*/
-        console.log($("#formAparts > div"))
-    </script>
-}

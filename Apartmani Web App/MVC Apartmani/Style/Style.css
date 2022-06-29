@@ -8,8 +8,26 @@
     gap: 12px;
 }
 
-#formAparts {
+#formAparts{
+    width: 32%;
+}
+
+#formAparts  div  ul {
+    list-style-type: none;
+    padding:0;
+}
+
+#formAparts > button {
     border: 1px solid silver;
     border-radius: 4px;
-    width: 32%;
+    width: 100%;
+    background-color: white;
+    text-align: left;
+}
+
+#tagsList{
+    height: 200px;
+    border:1px solid silver;
+    border-radius: 4px;
+    padding: 5px 20px;
 }

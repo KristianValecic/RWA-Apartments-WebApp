@@ -158,20 +158,20 @@
                         </fieldset>
                     </div>
                 </div>
-                <div class="col-2 mb-4 mt-3">
+            </div>
+                <div class="mb-4 mt-3">
                     <asp:Button ID="btnChangeImg" class="btn btn-secondary" runat="server" Text="Change images" />
                 </div>
-                <div class="h-25 overflow-auto p-3">
+                <div class="h-25 p-3">
                     <%--style="min-height: 250px;"--%>
 
-                    <%--<asp:Image ID="imgApart" CssClass="" runat="server" />--%>
                     <asp:Repeater ID="rptrImages" runat="server">
                         <ItemTemplate>
-                            <p><%# Eval(nameof(Lib.Models.Picture.Path)) %></p>
+                            <asp:Image ID="imgApart" CssClass="" runat="server" ImageUrl="<%# Eval(nameof(Lib.Models.Picture.Base64)) %>"/>
+                            <%--<p><%# Eval(nameof(Lib.Models.Picture.Path)) %></p>--%>
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>
-            </div>
             <%--</div>--%>
         </div>
     </div>

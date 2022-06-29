@@ -143,7 +143,20 @@ create PROC loadImagesForAparment
 AS
 BEGIN
 	select * from ApartmentPicture
-	where ApartmentId = @apartmentID
+	where ApartmentId = @apartmentID and DeletedAt is null
+END
+go
+
+create PROC AddImageForAparment
+	@GUID uniqueidentifier,
+	@apartmentID int,
+	@Base64 nvarchar(400),
+	@name nvarchar(250),
+	@IsRepresentative bit
+AS
+BEGIN
+	insert into ApartmentPicture (Guid, CreatedAt, ApartmentId, Base64Content, Name, IsRepresentative)
+	values()
 END
 go
 

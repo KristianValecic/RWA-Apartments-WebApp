@@ -10,10 +10,10 @@ namespace Lib.Models
     {
         public int ID { get; set; }
         public string Guid { get; set; }
-        public string Path { get; set; }
+        public string Base64 { get; set; }
         public string Name { get; set; }
         public bool IsRepresentitive { get; set; }
 
-        public override string ToString() => Path;
+        public override string ToString() => Base64;
     }
 }

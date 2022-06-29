@@ -10,7 +10,7 @@ namespace MVC_Apartmani.Models
     {
         private static IRepo _repo = RepoFactory.GetRepo();
 
-        internal static List<User> LoadUsers()
+        public static List<User> LoadUsers()
         {
             List<User> users = new List<User>();
             _repo.LoadUsers().ToList().ForEach(u =>
@@ -29,7 +29,7 @@ namespace MVC_Apartmani.Models
             return users;
         }
 
-        internal static int AddUser(User user)
+        public static int AddUser(User user)
         {
             if (_repo.AddUser(user) == 1)
             {
@@ -40,14 +40,19 @@ namespace MVC_Apartmani.Models
                 return 0;
             }
         }
-        internal static IList<Lib.Models.Apartment> LoadAllApartments()
+        public static IList<Lib.Models.Apartment> LoadAllApartments()
         {
             return _repo.LoadApartments();
         }
 
-        internal static object GetApartmentById(int apartmentID)
+        public static Lib.Models.Apartment GetApartmentById(int apartmentID)
         {
             return _repo.GetApartmentById(apartmentID);
+        }
+
+        public static IList<Lib.Models.Tag> LoadTagsForApartment(int apartmentID)
+        {
+            return _repo.LoadTagsForApartment(apartmentID);
         }
     }
 }

@@ -1,108 +1,163 @@
 ﻿@model Lib.Models.Apartment
-
+@{
+    IList<Lib.Models.Tag> LoadTagsForApartment = MVC_Apartmani.Models.Repo.LoadTagsForApartment(Model.ID);
+}
 <div>
     <h4>Apartment</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ID)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.GUID)
-        </dd>
+    <div class="container">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <div class="row gx-5">
+            <div class="col">
+                <div class="row ">
+                    <h1>@Html.DisplayFor(model => model.Name) - @Html.DisplayFor(model => model.City)</h1>
+                    <div class="row">
+                        <div class="col">
+                            <img src="#" alt="representative apart image" />
+                        </div>
+                        <div class="col">
+                            <dl class="dl-horizontal">
+                                <dd>
+                                    @Html.DisplayNameFor(model => model.Owner):
+                                    @Html.DisplayFor(model => model.Owner)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                                <dd>
+                                    @Html.DisplayNameFor(model => model.City):
+                                    @Html.DisplayFor(model => model.City)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Owner)
-        </dt>
+                                <dd>
+                                    @Html.DisplayNameFor(model => model.Address):
+                                    @Html.DisplayFor(model => model.Address)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Owner)
-        </dd>
+                                <dd>
+                                    @Html.DisplayNameFor(model => model.Status):
+                                    @Html.DisplayFor(model => model.Status)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
+                                <dd>
+                                    @Html.DisplayNameFor(model => model.Status):
+                                    @Html.DisplayFor(model => model.Status)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
+                                <dd>
+                                    @Html.DisplayNameFor(model => model.BeachDistance):
+                                    @Html.DisplayFor(model => model.BeachDistance)
+                                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+                                <dd>
+                                    @Html.DisplayNameFor(model => model.MaxAdults):
+                                    @Html.DisplayFor(model => model.MaxAdults)
+                                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+                                <dd>
+                                    @Html.DisplayNameFor(model => model.MaxChildren):
+                                    @Html.DisplayFor(model => model.MaxChildren)
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <p>@Html.DisplayFor(model => model.Price)€</p>
+                </div>
+                <div class="row p-4">
+                    <ul id="tagsList" class="overflow-auto">
+                        @if (LoadTagsForApartment.Count == 0)
+                        {
+                            <p>No tags for this apartment yet</p>
+                        }
+                        else
+                        {
+                            foreach (var item in LoadTagsForApartment)
+                            {
+                                <li>@item.Name</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+            <div class="col">
+                <div class="row">
+                    <h1>Contact</h1>
+                    <div class="row p-2">
+                        <div class="col-2">
+                            <label for="txtFirstName" class="form-label">Name: </label>
+                        </div>
+                        <div class="col-5">
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+                            <input id="txtFirstName" type="text" class="form-control" />
+                        </div>
+                        <div class="col-5">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
+                            <input id="txtLastName" type="text" class="form-control" />
+                        </div>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
+                    <div class="row p-2">
+                        <div class="col-2">
+                            <label for="txtEmail" class="form-label">Email: </label>
+                        </div>
+                        <div class="col-10">
+                            <input id="txtEmail" type="text" class="form-control" />
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TotalRooms)
-        </dt>
+                    <div class="row p-2">
+                        <div class="col-2">
+                            <label for="txtAddress" class="form-label">Address: </label>
+                        </div>
+                        <div class="col-10">
+                            <input id="txtAddress" type="text" class="form-control" />
+                        </div>
+                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.TotalRooms)
-        </dd>
+                    <div class="row p-2">
+                        <div class="col-2">
+                            <label for="txtChildren" class="form-label">Children: </label>
+                        </div>
+                        <div class="col-6">
+                            <input id="txtChildren" type="text" class="form-control" />
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BeachDistance)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BeachDistance)
-        </dd>
+                    <div class="row p-2">
+                        <div class="col-2">
+                            <label for="txtFrom" class="form-label">From: </label>
+                        </div>
+                        <div class="col-6">
+                            <input id="txtFrom" type="text" class="form-control" />
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxAdults)
-        </dt>
+                    <div class="row p-2">
+                        <div class="col-2">
+                            <label for="txtTo" class="form-label">To: </label>
+                        </div>
+                        <div class="col-6">
+                            <input id="txtTo" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-10"></div>
+                        <div class="col-2">
+                            <button type="submit" class="btn btn-primary">Reserve</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                @Html.ActionLink("Back to List", "Index", htmlAttributes: new { @class = "btn btn-secondary" }, routeValues: null)
+            </div>
+            @*Slike*@
+            <div class="row">
 
-        <dd>
-            @Html.DisplayFor(model => model.MaxAdults)
-        </dd>
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxChildren)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaxChildren)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.totalPlacesCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.totalPlacesCount)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
