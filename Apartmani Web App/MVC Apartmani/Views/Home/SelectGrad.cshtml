@@ -1,0 +1,39 @@
+﻿@model MVC_Apartmani.Models.ViewModels.SelectGradVM
+
+@{
+    ViewBag.Title = "SelectGrad";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    SelectList ddlGradovi = new SelectList(
+        items: Model.Gradovi,
+        dataValueField: "IDGrad",
+        dataTextField: "Naziv"
+        );
+
+    SelectList ddlDrzave = new SelectList(
+        items: Model.Drzave,
+        dataValueField: "IDDrzava",
+        dataTextField: "Naziv"
+        );
+}
+
+<div class="p-5 bg-secondary text-black">
+
+    @Html.Partial(partialViewName: "_DDLDrzave", model: ddlDrzave)
+
+    @using (Html.BeginForm(controllerName: "Home", actionName: "SelectKupci", htmlAttributes: new { id = "formGradovi" }, routeValues: null, method: FormMethod.Post))
+    {
+        @Html.Label(expression: "IDGrad", labelText: "Grad")
+        @Html.DropDownList(
+             optionLabel: "--- odaberi ---",
+             selectList: ddlGradovi,
+             name: "IDGrad",
+             htmlAttributes: new { @class = "form-control" })
+    }
+</div>
+
+@section scripts{
+    <script>
+        $('#IDDrzava').change(e => $("#formDrzava").submit())
+    </script>  
+}

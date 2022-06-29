@@ -1,0 +1,12 @@
+﻿
+@model SelectList
+
+@using (Html.BeginForm(controllerName: "Home", actionName: "SelectGrad", htmlAttributes: new { id = "formDrzava" }, routeValues: null, method: FormMethod.Post))
+{
+    @Html.Label(expression: "IDDrzava", labelText: "Drzava")
+    @Html.DropDownList(
+         optionLabel: "--- odaberi ---",
+         selectList: Model,
+         name: "IDDrzava",
+         htmlAttributes: new { @class = "form-control" })
+}

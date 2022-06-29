@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Lib.Models.Apartment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Rwa apartments</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+</p>
+<div id="homeApartContainer" class="flex-wrap">
+
+    @foreach (var item in Model)
+    {
+        @Html.Partial(partialViewName: "_ApartmentContainer", model: item)
+    }
+</div>
+
+
+@section scripts{
+    <script>
+        $("#formAparts > div").click(e => $("#formAparts").submit())
+        console.log($("#formAparts > div"))
+    </script>
+}

@@ -1,0 +1,15 @@
+﻿body {
+}
+
+#homeApartContainer {
+    display: flex;
+    float: none;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#formAparts {
+    border: 1px solid silver;
+    border-radius: 4px;
+    width: 32%;
+}

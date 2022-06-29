@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+    string error = ViewBag.Error as string;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Error</h1>
+        <div class="alert alert-warning">
+            <p>@error</p>
+        </div>
+        <hr />
+        @Html.ActionLink("Starting page", controllerName: "Home", actionName: "Index")
+    </div>
+</body>
+</html>

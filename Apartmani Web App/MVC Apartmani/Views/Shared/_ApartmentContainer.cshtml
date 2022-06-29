@@ -1,0 +1,31 @@
+﻿@model Lib.Models.Apartment
+
+@using (Html.BeginForm(controllerName: "Home", actionName: "SelectApartment", htmlAttributes: new { id = "formAparts" }, routeValues: new { id = Model.ID }, method: FormMethod.Get))
+{
+    @*@Html.HiddenFor(model => model.ID)*@
+    <div class="p-2">
+        <div class="row">
+            <p>* * * * *</p>
+        </div>
+        <div class="row">
+            <div class="col">
+                <img src="#" alt="representative img" />
+            </div>
+            <div class="col">
+                <div class="col">
+                    <h5><b>@Html.DisplayFor(model => model.Name)</b></h5>
+
+                    <ul>
+                        <li> @Html.DisplayFor(model => model.City)</li>
+                        <li> @Html.DisplayFor(model => model.BeachDistance)</li>
+                        <li> @Html.DisplayFor(model => model.TotalRooms)</li>
+                        <li> @Html.DisplayFor(model => model.MaxAdults)</li>
+                        <li> @Html.DisplayFor(model => model.MaxChildren)</li>
+                    </ul>
+
+                    <p> @Html.DisplayFor(model => model.Price)€</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,48 @@
+AddApart popravi da se ne moze unest isti apart koji posotoji!!!!!
+popravi delete button da ne pokrece validaciju za rezervacije
+dodaj status na aparts listu
+mozda dodati: kada se stavi na slobodno onda se izbrisu rezervacije.
+USER KONTROLA za slike, svaka ima svoj gumb "change"
+
+Bug: AddAapart kada se dodaje tag izbrisu se sva polja (IDEJA: Viestate["apartman"] spremaj podatke)
+Promijeniti imena dohvacenih podat na NameEng
+---------------------------------------------------------------------
+ISTESTIRAJ WEB.FORMS OPET RADI LI SVE
+
+pogledaj vjezbe11 kako se salje userid
+
+User dio  MVC
+
+5. Pretraživanje apartmana - filtriranje je prema karakteristikama: broj soba, broj
+mjesta za odrasle i broj mjesta za djecu; po želji omogućiti i dodatne uvjete
+
+6. Pretraživanje apartmana - sortiranje neka bude po ili default (po ID) ili
+uzlazno/silazno po cijeni, tako da se svodi na 3 odabira (nema/uzlazno/silazno).
+
+7. U cookie se spremaju parametri pretraživanja (filtriranje i sortiranje), te prikazuju i
+primjenjuju kada korisnik ponovo dođe na stranicu.
+
+8. Prikaz nađenih apartmana: neka budu prikazani samo slobodni apartmani; slika
+prikazana za apartman je ona koja je odabrana kao reprezentativna; neka bude
+prikazano nekoliko osnovnih karakteristika: broj soba, broj mjesta za odrasle i djecu,
+po želji i koju drugu karakteristiku; ovdje iskoristite AJAX tehniku
+
+9.Za svaki apartman je moguće otvoriti stranicu s detaljima te prikazati sve podatke o
+apartmanu (reprezentativna slika, udaljenost od mora, galerija slika, tagovi...) -
+prikazano na slici 4
+
+10. Na stranici s apartmanima implementirati foto-galeriju s mogućnošću otvaranja
+pojedine slike preko ekrana; ovdje iskoristite AJAX tehniku
+
+11.Na stranici s detaljima nalazi se kontakt forma i gumb "Pošalji upit" (ili "Rezerviraj")
+koji omogućuje korisniku navedenu funkcionalnost. Forma treba biti unaprijed
+ispunjena korisničkim podacima u slučaju da je korisnik logiran u sustav.
+Administrator će na „Pošalji upit“ zaprimiti upit za rezervaciju od korisnika. Ako
+korisnik nije logiran u sustav, kod slanja upita za rezervaciju implementirati
+CAPTCHA ili sličnu zaštitu protiv botova. Iskoristite AJAX tehniku kod slanja obrasca.
+
+12.Implementirati interakciju za korisnike koji su prijavljeni: ostavljanje ocjene, unos
+recenzije; ovdje iskoristite AJAX tehniku
+
+13. Neke od navedenih funkcionalnosti nisu prikazane slikama i potrebno ih je
+implementirati na način da budu vizualno konzistentne s ostatkom sučelja

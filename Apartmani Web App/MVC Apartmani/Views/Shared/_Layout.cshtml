@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Style/Style.css" rel="stylesheet" />
+    @Styles.Render("~/Content")
+</head>
+<body>
+
+    <div class="navbar navbar-dark bg-dark navbar-expand-lg">
+        <div class="container-fluid">
+            @Html.ActionLink("RWA vježbe", "Index", "Home", null, new { @class = "navbar-brand" })
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link" })
+                    </li>
+                </ul>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul class="nav navbar-nav">
+                        <li>
+                            @Html.ActionLink("Dashboard", "Index", "Dashboard", null, new { @class = "nav-link" })
+                        </li>
+                    </ul>
+                }
+            </div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class='flex-row-reverse'>
+                    @Html.Label(User.Identity.Name, User.Identity.Name, new { @class = "label text-light" })
+                    @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "btn btn-primary" })
+                </div>
+            }
+            else
+            {
+                <div class='flex-row-reverse'>
+                    @Html.ActionLink("Login", "Login", "Home", null, new { @class = "btn btn-outline-light" })
+                    @Html.ActionLink("Register", "Register", "Home", null, new { @class = "btn btn-outline-light" })
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="container py-3">
+        @RenderBody()
+    </div>
+
+    <hr class='mt-4'><div class='text-center'><p>RWA-Kristian Valečić-@DateTime.Now.Year &copy;</p></div>
+
+    @Scripts.Render("~/Scripts")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

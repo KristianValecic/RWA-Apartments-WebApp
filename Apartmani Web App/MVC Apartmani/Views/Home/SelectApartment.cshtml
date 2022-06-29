@@ -1,0 +1,108 @@
+﻿@model Lib.Models.Apartment
+
+<div>
+    <h4>Apartment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GUID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Owner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalRooms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TotalRooms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BeachDistance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BeachDistance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxAdults)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxAdults)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxChildren)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxChildren)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.totalPlacesCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.totalPlacesCount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
