@@ -1,6 +1,7 @@
 ﻿@model Lib.Models.Apartment
 
 @using (Html.BeginForm(controllerName: "Home", actionName: "SelectApartment", htmlAttributes: new { id = "formAparts" }, routeValues: new { id = Model.ID }, method: FormMethod.Get))
+@*@using (Html.ActionLink(actionName: "SelectApartment", controllerName: "home"))*@
 {
     @*@Html.HiddenFor(model => model.ID)*@
     <div class="p-2">

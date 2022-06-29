@@ -17,10 +17,12 @@
     }
 </div>
 
-
 @section scripts{
     <script>
-        $("#formAparts > div").click(e => $("#formAparts").submit())
+        $("#formAparts > div").click(e => console.log(e/*$("#formAparts").attr("action")*/))
+
+        $("#formAparts > div").click(e => $(e).submit())
+        /*$("#formAparts").submit()*/
         console.log($("#formAparts > div"))
     </script>
 }
