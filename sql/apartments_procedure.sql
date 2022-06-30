@@ -182,7 +182,7 @@ BEGIN
 	declare @StatusId int, @CityId int
 
 	select @StatusId = id from ApartmentStatus 
-	where Name = @Status
+	where NameEng = @Status
 
 	select @CityId = id from City 
 	where Name = @City
@@ -231,7 +231,7 @@ BEGIN
 	declare @StatusId int, @CityId int, @OwnerId nvarchar(250)---, @TypeId nvarchar(250)
 
 	select @StatusId = id from ApartmentStatus 
-	where Name = @Status
+	where NameEng = @Status
 
 	select @CityId = Id from City 
 	where Name = @City

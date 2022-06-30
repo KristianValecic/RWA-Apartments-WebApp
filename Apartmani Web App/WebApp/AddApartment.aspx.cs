@@ -2,10 +2,12 @@
 using Lib.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebApp.App_UserControls;
 
 namespace WebApp
 {
@@ -29,6 +31,7 @@ namespace WebApp
             {
                 LoadDdl();
                 LoadListBox();
+                LoadImgs();
                 if (Session["Apartment"] != null)
                 {
                     LoadData();
@@ -38,6 +41,17 @@ namespace WebApp
             {
                 SaveApartToSesion();
             }
+        }
+
+        private void LoadImgs()
+        {
+            //foreach (Picture img in addedPicutres)
+            //{
+            //    ImageControl control = new ImageControl();
+            //}
+            rptrImages.DataSource = addedPicutres;
+            rptrImages.Controls.Add(new ImageControl());
+            rptrImages.DataBind();
         }
 
         private void LoadData()
@@ -106,22 +120,33 @@ namespace WebApp
 
             ((IRepo)Application["database"]).AddApartment(tempApartment);
 
-            //((IRepo)Application["database"]).AddApartment(tempApartment);
-
             Apartment tempApart = (Apartment)((IRepo)Application["database"]).GetApartment(tempApartment.Name, tempApartment.Owner, tempApartment.Address);
 
-            foreach (ListItem tag in lsTags.Items)
+            try
             {
-                int succeeded = ((IRepo)Application["database"]).AddTagToApartment(int.Parse(tag.Value), tempApart.ID);
+                foreach (ListItem tag in lsTags.Items)
+                {
+                    int succeeded = ((IRepo)Application["database"]).AddTagToApartment(int.Parse(tag.Value), tempApart.ID);
+                }
+
+                foreach (ListItem reservation in lsReservations.Items)
+                {
+                    Reservation tempRes = Reservation.Parse(reservation.Text);
+                    int succeeded = ((IRepo)Application["database"]).AddReservationToApartment(tempRes.UserName, tempRes.Details, tempApart.ID);
+                    ((IRepo)Application["database"]).SetReserved(tempApart.ID);
+                }
+
+                foreach (Picture img in addedPicutres)
+                {
+                    ((IRepo)Application["database"]).AddImageForAparment(img, tempApart.ID);
+                }
             }
-            
-            foreach (ListItem reservation in lsReservations.Items)
+            catch (Exception)
             {
-                Reservation tempRes = Reservation.Parse(reservation.Text);
-                int succeeded = ((IRepo)Application["database"]).AddReservationToApartment(tempRes.UserName, tempRes.Details, tempApart.ID);
-                ((IRepo)Application["database"]).SetReserved(tempApart.ID);
+                //handle exception
             }
 
+            Session["Apartment"] = null;
             Response.Redirect("Apartments");
         }
 
@@ -144,8 +169,6 @@ namespace WebApp
 
             tempTags.Add((Tag)((IRepo)Application["database"]).GetTagById(ddlAllTags.SelectedValue));
 
-            //SaveApartToSesion();
-             
             Response.Redirect(Request.Url.LocalPath);
         }
 
@@ -178,7 +201,6 @@ namespace WebApp
 
         protected void btnDeleteReservation_Click(object sender, EventArgs e)
         {
-            //tempReservations.Remove();
             Response.Redirect(Request.Url.LocalPath);
         }
 
@@ -200,7 +222,37 @@ namespace WebApp
 
         protected void btnAddImg_Click(object sender, EventArgs e)
         {
+            if (FileUpload.HasFile)
+            {
+                addedPicutres.Add(new Picture
+                {
+                    Name = txtImgName.Text,
+                    IsRepresentitive = cbIsRepresentative.Checked,
+                    Base64 = GetBase64(FileUpload.FileName)
+                });
 
+                Response.Redirect(Request.Url.LocalPath);
+            }
+            else
+            {
+                lblSelectedFileError.Visible = false;
+                lblSelectedFileMessage.Visible = true;
+            }
+        }
+        private string GetBase64(string imgName)
+        {
+            string imgPath = Server.MapPath("~/uploads/");
+
+            if (!Directory.Exists(imgPath))
+            {
+                Directory.CreateDirectory(imgPath);
+            }
+
+            string imgFilePath = imgPath + imgName;
+            FileUpload.SaveAs(imgFilePath);
+
+            byte[] imgArray = File.ReadAllBytes(imgFilePath);
+            return Convert.ToBase64String(imgArray);
         }
     }
 }

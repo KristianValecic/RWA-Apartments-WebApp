@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminPage.Master" AutoEventWireup="true" CodeBehind="AddApartment.aspx.cs" Inherits="WebApp.AddApartment" %>
 
+<%@ Register Src="~/App_UserControls/ImageControl.ascx" TagPrefix="uc1" TagName="ImageControl" %>
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="server">
@@ -172,17 +175,21 @@
                 <div class="mb-4 mt-3">
                     <asp:FileUpload ID="FileUpload" runat="server" />
                     <asp:Button ID="btnAddImg" class="btn btn-secondary" runat="server" Text="Add image" type="file"
-                        ValidationGroup="ImgValidation" OnClick="btnAddImg_Click"/>
-                    
+                        ValidationGroup="ImgValidation" OnClick="btnAddImg_Click" />
+
                     <div class="row">
                         <asp:Label ID="lblSelectedFileMessage" runat="server" ForeColor="Red" Visible="false">No file selected</asp:Label>
                         <asp:Label ID="lblSelectedFileError" runat="server" ForeColor="Red" Visible="false">There was an error with the file upload</asp:Label>
                     </div>
-                    <div id="d-flex flex-wrap">
-
-                    </div>
                 </div>
             </div>
+                    <div id="divImgs" class="d-flex flex-wrap" runat="server">
+                        <asp:Repeater ID="rptrImages" runat="server">
+                            <ItemTemplate>
+                                <uc1:ImageControl runat="server" ID="ImageControl" />
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
         </div>
     </div>
 </asp:Content>
