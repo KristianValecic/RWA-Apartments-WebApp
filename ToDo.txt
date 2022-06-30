@@ -1,8 +1,6 @@
 AddApart-----------------------------------
 popravi da se ne moze unest isti apart koji posotoji!!!!!
-dodavanje slika
 -------------------------------------------
-dodaj status na aparts listu
 mozda dodati: kada se stavi na slobodno onda se izbrisu rezervacije.
 
 ---------------------------------------------------------------------

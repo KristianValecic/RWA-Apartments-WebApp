@@ -183,13 +183,13 @@
                     </div>
                 </div>
             </div>
-                    <div id="divImgs" class="d-flex flex-wrap" runat="server">
-                        <asp:Repeater ID="rptrImages" runat="server">
-                            <ItemTemplate>
-                                <uc1:ImageControl runat="server" ID="ImageControl" />
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </div>
+            <div id="divImgs" class="d-flex flex-wrap" runat="server">
+                <asp:Repeater ID="rptrImages" runat="server">
+                    <ItemTemplate>
+                        <uc1:ImageControl runat="server" ID="ImageControl" />
+                    </ItemTemplate>
+                </asp:Repeater>
+            </div>
         </div>
     </div>
 </asp:Content>
