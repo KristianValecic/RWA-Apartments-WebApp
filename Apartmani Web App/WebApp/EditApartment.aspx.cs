@@ -2,6 +2,8 @@
 using Lib.Models;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -37,10 +39,10 @@ namespace WebApp
         {
             rptrImages.DataSource = ((IRepo)Application["database"]).loadImagesForAparment(((Apartment)Session["apartment"]).ID);
             rptrImages.DataBind();
-            if (rptrImages.Controls.Count == 0)
-            {
-                btnChangeImg.Text = "Add image";
-            }
+            //if (rptrImages.Controls.Count == 0)
+            //{
+            //    btnChangeImg.Text = "Add image";
+            //}
         }
 
         private void LoadListBox()
@@ -65,7 +67,7 @@ namespace WebApp
 
             IList<Status> statuses = ((IRepo)Application["database"]).LoadAllStatuses();
             ddlStatuses.DataSource = statuses;
-            ddlStatuses.DataValueField = nameof(Status.Name);
+            ddlStatuses.DataValueField = nameof(Status.NameEng);
             ddlStatuses.DataTextField = nameof(Status.NameEng);
             ddlStatuses.DataBind();
 
@@ -92,7 +94,7 @@ namespace WebApp
                 lblOwnerName.Text = apartment.Owner;
                 headerName.InnerText = apartment.Name;
 
-                apartment.PicturePaths = ((IRepo)Application["database"]).loadImagesForAparment(apartment.ID);
+                //apartment.PicturePaths = ((IRepo)Application["database"]).loadImagesForAparment(apartment.ID);
             }
         }
 
@@ -118,7 +120,7 @@ namespace WebApp
                 //lblOwnerName.Text = apartment.Owner;
                 //headerName.InnerText = apartment.Name;
 
-                //apartment.PicturePaths = ((IRepo)Application["database"]).LoadPicturesForApartment(apartment.ID);
+                //apartment.Pictures = ((IRepo)Application["database"]).loadImagesForAparment(apartment.ID);
             }
 
             ((IRepo)Application["database"]).UpdateApartment(apartment);
@@ -190,6 +192,59 @@ namespace WebApp
         protected void lsReservations_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnDeleteReservation.Visible = true;
+        }
+
+        protected void btnChangeImg_Click(object sender, EventArgs e)
+        {
+            UploadImage();
+        }
+
+        private void UploadImage()
+        {
+            if (FileUpload.HasFile)
+            {
+                try
+                {
+                    string imgName = FileUpload.FileName;
+                    string imgPath = Server.MapPath("~/uploads/");
+
+                    if (!Directory.Exists(imgPath))
+                    {
+                        Directory.CreateDirectory(imgPath);
+                    }
+
+                    string imgFilePath = imgPath + imgName;
+                    FileUpload.SaveAs(imgFilePath);
+
+                    byte[] imgArray = File.ReadAllBytes(imgFilePath);
+                    string base64 = Convert.ToBase64String(imgArray);
+
+                    ((IRepo)Application["database"]).AddImageForAparment(new Picture
+                    {
+                        Name = txtImgName.Text,
+                        IsRepresentitive = cbIsRepresentative.Checked,
+                        Base64 = base64
+                    }, apartment.ID);
+
+                    File.Delete(imgFilePath);
+
+                    Response.Redirect(Request.Url.LocalPath);
+                }
+                catch (Exception)
+                {
+                    // bolji handle greske
+                    //Response.StatusCode = 400;
+                    //Response.Redirect("/");
+                    //Response.End();
+                    lblSelectedFileError.Visible = true;
+                    lblSelectedFileMessage.Visible = false;
+                }
+            }
+            else
+            {
+                lblSelectedFileError.Visible = false;
+                lblSelectedFileMessage.Visible = true;
+            }
         }
     }
 }

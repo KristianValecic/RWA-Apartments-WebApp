@@ -1,11 +1,10 @@
-AddApart popravi da se ne moze unest isti apart koji posotoji!!!!!
-popravi delete button da ne pokrece validaciju za rezervacije
+AddApart-----------------------------------
+popravi da se ne moze unest isti apart koji posotoji!!!!!
+dodavanje slika
+-------------------------------------------
 dodaj status na aparts listu
 mozda dodati: kada se stavi na slobodno onda se izbrisu rezervacije.
-USER KONTROLA za slike, svaka ima svoj gumb "change"
 
-Bug: AddAapart kada se dodaje tag izbrisu se sva polja (IDEJA: Viestate["apartman"] spremaj podatke)
-Promijeniti imena dohvacenih podat na NameEng
 ---------------------------------------------------------------------
 ISTESTIRAJ WEB.FORMS OPET RADI LI SVE
 
@@ -14,8 +13,6 @@ Dodavanje rezervacija
 ajax search
 
 spremanje u cookie kako je korisnik spremao prije
-
-pogledaj vjezbe11 kako se salje userid
 
 User dio  MVC
 

@@ -40,7 +40,7 @@ namespace WebApp
 
             IList<Status> statuses = ((IRepo)Application["database"]).LoadAllStatuses();
             ddlFilterStatus.DataSource = statuses;
-            ddlFilterStatus.DataValueField= nameof(Status.Name);
+            ddlFilterStatus.DataValueField= nameof(Status.NameEng);
             ddlFilterStatus.DataTextField = nameof(Status.NameEng);
             ddlFilterStatus.DataBind();
             ddlFilterStatus.Items.Insert(0, new ListItem(String.Empty, String.Empty));

@@ -23,6 +23,6 @@ namespace Lib.Models
         public int totalPlacesCount {
             get => MaxChildren + MaxAdults;
         }
-        public IList<Picture> PicturePaths { get; set; }
+        public IList<Picture> Pictures { get; set; }
     }
 }

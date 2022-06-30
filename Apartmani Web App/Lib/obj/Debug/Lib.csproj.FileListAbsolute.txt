@@ -14,11 +14,11 @@ D:\Faks\RWA\Apartmani Web App\Apartmani Web App\Lib\obj\Debug\Lib.csproj.CoreCom
 D:\Faks\RWA\Apartmani Web App\Apartmani Web App\Lib\obj\Debug\Lib.csproj.CopyComplete
 D:\Faks\RWA\Apartmani Web App\Apartmani Web App\Lib\obj\Debug\Lib.dll
 D:\Faks\RWA\Apartmani Web App\Apartmani Web App\Lib\obj\Debug\Lib.pdb
-D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\obj\Debug\Lib.csproj.AssemblyReference.cache
-D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\obj\Debug\Lib.csproj.CoreCompileInputs.cache
-D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\obj\Debug\Lib.dll
-D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\obj\Debug\Lib.pdb
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\bin\Debug\Lib.dll
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\bin\Debug\Lib.pdb
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\obj\Debug\Lib.csproj.AssemblyReference.cache
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\obj\Debug\Lib.csproj.CoreCompileInputs.cache
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\obj\Debug\Lib.csproj.CopyComplete
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\obj\Debug\Lib.dll
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\Lib\obj\Debug\Lib.pdb

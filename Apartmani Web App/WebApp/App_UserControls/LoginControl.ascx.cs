@@ -21,7 +21,7 @@ namespace WebApp.App_UserControls
 
             if (Session["user"] != null)
             {
-                Response.Redirect("Dashboard.aspx");
+                Response.Redirect("Apartments.aspx");
             }
         }
 
@@ -48,7 +48,7 @@ namespace WebApp.App_UserControls
                     };
 
                     Session["user"] = user;
-                    Response.Redirect("Dashboard.aspx");
+                    Response.Redirect("Apartments.aspx");
                 }
 
                 if (user == null)

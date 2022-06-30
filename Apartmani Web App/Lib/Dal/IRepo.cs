@@ -18,6 +18,7 @@ namespace Lib.Dal
         void UpdateUser(User selectedUser);
         void DeleteUser(int userId);
         IList<Apartment> LoadApartments();
+        void DeleteImg(int imgID);
         IList<City> LoadAllCities();
         void UpdateApartment(Apartment apartment);
         void DeleteApartment(int apartmentID);
@@ -25,6 +26,7 @@ namespace Lib.Dal
         IList<Status> LoadAllStatuses();
         IList<Tag> LoadTagsForApartment(int apartID);
         IList<Picture> loadImagesForAparment(int apartmentID);
+        void AddImageForAparment(Picture p, int apartID);
         void RemoveTagFromApartment(int tagID, int apartmentID);
         int AddTagToApartment(int tagID, int apartmentID);
         Tag GetTagById(string tagID);

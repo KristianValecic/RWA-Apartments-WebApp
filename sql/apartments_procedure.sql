@@ -119,8 +119,6 @@ begin
 	delete AspNetUsers where id = @id
 end
 
---kada kreiras procedure pazi na imenovanja stupaca
-
 create PROC LoadApartments
 AS
 BEGIN
@@ -142,21 +140,29 @@ create PROC loadImagesForAparment
 	@apartmentID int
 AS
 BEGIN
-	select * from ApartmentPicture
+	select id, guid, CreatedAt, ApartmentId, Base64Content as 'Base64', name, IsRepresentative from ApartmentPicture
 	where ApartmentId = @apartmentID and DeletedAt is null
+END
+go
+
+create PROC DeleteImg
+	@ImgID int
+AS
+BEGIN
+	Delete from ApartmentPicture where id = @ImgID
 END
 go
 
 create PROC AddImageForAparment
 	@GUID uniqueidentifier,
 	@apartmentID int,
-	@Base64 nvarchar(400),
+	@Base64 nvarchar(max),
 	@name nvarchar(250),
 	@IsRepresentative bit
 AS
 BEGIN
 	insert into ApartmentPicture (Guid, CreatedAt, ApartmentId, Base64Content, Name, IsRepresentative)
-	values()
+	values(@GUID, GETDATE(), @apartmentID, @Base64, @name, @IsRepresentative)
 END
 go
 

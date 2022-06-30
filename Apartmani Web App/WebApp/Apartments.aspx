@@ -34,6 +34,7 @@
                                         <th scope="col">Children</th>
                                         <th scope="col">Rooms</th>
                                         <th scope="col">Places</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">Price</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -49,6 +50,7 @@
                                 <td><%# Eval(nameof(Lib.Models.Apartment.MaxChildren)) %></td>
                                 <td><%# Eval(nameof(Lib.Models.Apartment.TotalRooms)) %></td>
                                 <td><%# Eval(nameof(Lib.Models.Apartment.totalPlacesCount)) %></td>
+                                <td><%# Eval(nameof(Lib.Models.Apartment.Status)) %></td>
                                 <td><%# Eval(nameof(Lib.Models.Apartment.Price)) %></td>
                                 <td>
                                     <asp:LinkButton ID="btnEdit" OnClick="btnEdit_Click" CssClass="btn btn-primary"

@@ -17,6 +17,7 @@ namespace WebApp
         private IList<City> cities;
         private static IList<Tag> tempTags = new List<Tag>();
         private static IList<Reservation> tempReservations = new List<Reservation>();
+        private static IList<Picture> addedPicutres = new List<Picture>();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["user"] == null)
@@ -28,29 +29,32 @@ namespace WebApp
             {
                 LoadDdl();
                 LoadListBox();
+                if (Session["Apartment"] != null)
+                {
+                    LoadData();
+                }
             }
-            //else
-            //{
-            //    SaveInsertedData();
-            //    LoadData();
-            //}
-
+            else
+            {
+                SaveApartToSesion();
+            }
         }
 
-        //private void LoadData()
-        //{
-        //    txtName.Text = txtNameHidden.Value;
-        //    txtOwner.Text = txtOwnerHidden.Value;
-        //    txtAddress.Text = txtAdressHidden.Value;
-        //    txtMaxChildren.Text = txtMaxChildrenHidden.Value;
-        //    txtMaxAdults.Text = txtMaxAdultsHidden.Value;
-        //    //ddlStatuses.SelectedValue = txtStatusHidden.Value;
-        //    txtPrice.Text = txtPriceHidden.Value;
-        //    txtRooms.Text = txtRoomsHidden.Value;
-        //    txtBeachDistance.Text = txtBeachDistanceHidden.Value;
+        private void LoadData()
+        {
+            txtName.Text = ((Apartment)Session["Apartment"]).Name;
+            txtOwner.Text = ((Apartment)Session["Apartment"]).Owner;
+            txtAddress.Text = ((Apartment)Session["Apartment"]).Address;
+            txtMaxChildren.Text = ((Apartment)Session["Apartment"]).MaxChildren.ToString();
+            txtMaxAdults.Text = ((Apartment)Session["Apartment"]).MaxAdults.ToString();
+            txtPrice.Text = ((Apartment)Session["Apartment"]).Price.ToString();
+            txtRooms.Text = ((Apartment)Session["Apartment"]).TotalRooms.ToString();
+            txtBeachDistance.Text = ((Apartment)Session["Apartment"]).BeachDistance.ToString();
+            ddlStatuses.SelectedValue = ((Apartment)Session["Apartment"]).Status;
+            //ddlStatuses.SelectedValue = txtStatusHidden.Value;
 
-        //    //ddlCity.SelectedValue = txtCityHidden.Value;
-        //}
+            //ddlCity.SelectedValue = txtCityHidden.Value;
+        }
 
         private void LoadListBox()
         {
@@ -73,7 +77,7 @@ namespace WebApp
 
             IList<Status> statuses = ((IRepo)Application["database"]).LoadAllStatuses();
             ddlStatuses.DataSource = statuses;
-            ddlStatuses.DataValueField = nameof(Status.Name);
+            ddlStatuses.DataValueField = nameof(Status.NameEng);
             ddlStatuses.DataTextField = nameof(Status.NameEng);
             //ddlStatuses.SelectedValue = Vacant;
             ddlStatuses.DataBind();
@@ -140,34 +144,27 @@ namespace WebApp
 
             tempTags.Add((Tag)((IRepo)Application["database"]).GetTagById(ddlAllTags.SelectedValue));
 
+            //SaveApartToSesion();
+             
             Response.Redirect(Request.Url.LocalPath);
         }
 
-        private void SaveInsertedData()
+        private void SaveApartToSesion()
         {
-            //txtNameHidden.Value = txtName.Text;
-            //txtOwnerHidden.Value = txtOwner.Text;
-            //txtCityHidden.Value = ddlCity.SelectedValue;
-            //txtAdressHidden.Value = txtAddress.Text;
-            //txtMaxChildrenHidden.Value = txtMaxChildren.Text;
-            //txtMaxAdultsHidden.Value = txtMaxAdults.Text;
-            //txtStatusHidden.Value = ddlStatuses.SelectedValue;
-            //txtPriceHidden.Value = txtPrice.Text;
-            //txtRoomsHidden.Value = txtRooms.Text;
-            //txtBeachDistanceHidden.Value = txtBeachDistance.Text;
-
-            //txtNameHidden.Value = txtName.Text;
-            //txtOwnerHidden.Value = txtOwner.Text;
-            //txtCityHidden.Value = ddlCity.SelectedValue;
-            //txtAdressHidden.Value = txtAddress.Text;
-            //txtMaxChildrenHidden.Value = txtMaxChildren.Text;
-            //txtMaxAdultsHidden.Value = txtMaxAdults.Text;
-            //txtStatusHidden.Value = ddlStatuses.SelectedValue;
-            //txtPriceHidden.Value = txtPrice.Text;
-            //txtRoomsHidden.Value = txtRooms.Text;
-            //txtBeachDistanceHidden.Value = txtBeachDistance.Text;
+            Session["Apartment"] = new Apartment
+            {
+                Name = txtName.Text,
+                Owner = txtOwner.Text,
+                City = ddlCity.SelectedValue,
+                Address = txtAddress.Text,
+                MaxChildren = String.IsNullOrEmpty(txtMaxChildren.Text) ? 0 : int.Parse(txtMaxChildren.Text),
+                MaxAdults = String.IsNullOrEmpty(txtMaxAdults.Text) ? 0 : int.Parse(txtMaxAdults.Text),
+                Status = ddlStatuses.SelectedValue,
+                Price = String.IsNullOrEmpty(txtPrice.Text) ? 0 : decimal.Parse(txtPrice.Text),
+                TotalRooms = String.IsNullOrEmpty(txtRooms.Text) ? 0 : int.Parse(txtRooms.Text),
+                BeachDistance = String.IsNullOrEmpty(txtBeachDistance.Text) ? 0 : int.Parse(txtBeachDistance.Text)
+            };
         }
-
         protected void btnDeleteTag_Click(object sender, EventArgs e)
         {
             tempTags.Remove((Tag)((IRepo)Application["database"]).GetTagById(lsTags.SelectedValue));
@@ -187,7 +184,6 @@ namespace WebApp
 
         protected void btnAddReservation_Click(object sender, EventArgs e)
         {
-
             tempReservations.Add(new Reservation
             {
                 UserName = txtReservationName.Text,
@@ -200,6 +196,11 @@ namespace WebApp
         protected void lsReservations_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnDeleteReservation.Visible = true;
+        }
+
+        protected void btnAddImg_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

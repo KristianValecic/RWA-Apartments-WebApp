@@ -13,6 +13,10 @@ namespace Lib.Models
         public string Base64 { get; set; }
         public string Name { get; set; }
         public bool IsRepresentitive { get; set; }
+        public string Base64ForHtml
+        {
+            get => "data:image/jpeg;base64," + Base64;
+        }
 
         public override string ToString() => Base64;
     }

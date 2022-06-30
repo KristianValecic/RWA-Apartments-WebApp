@@ -1,0 +1,1 @@
+Unos slika je Base64, ne path

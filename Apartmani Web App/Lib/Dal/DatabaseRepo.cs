@@ -279,7 +279,12 @@ namespace Lib.Dal
 
         public void AddImageForAparment(Picture p, int apartID)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENTS_CS, nameof(AddImageForAparment), Guid.NewGuid(), apartID, p.Base64, p.Name, p.IsRepresentitive);
+            SqlHelper.ExecuteNonQuery(APARTMENTS_CS, nameof(AddImageForAparment), Guid.NewGuid(), apartID, p.Base64, p.Name, (p.IsRepresentitive ? 1 : 0));
+        }
+
+        public void DeleteImg(int imgID)
+        {
+            SqlHelper.ExecuteNonQuery(APARTMENTS_CS, nameof(DeleteImg), imgID);
         }
 
         public Tag GetTagById(string tagID)
@@ -406,5 +411,7 @@ namespace Lib.Dal
                 MaxChildren = (int)row[nameof(Apartment.MaxChildren)]
             };
         }
+
+        
     }
 }

@@ -447,93 +447,84 @@ namespace WebApp
         protected global::System.Web.UI.WebControls.Button btnChangeImg;
 
         /// <summary>
-        /// txtNameHidden control.
+        /// lblImgName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtNameHidden;
+        protected global::System.Web.UI.WebControls.Label lblImgName;
 
         /// <summary>
-        /// txtOwnerHidden control.
+        /// txtImgName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtOwnerHidden;
+        protected global::System.Web.UI.WebControls.TextBox txtImgName;
 
         /// <summary>
-        /// txtStatusHidden control.
+        /// RequiredFieldValidator11 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtStatusHidden;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator11;
 
         /// <summary>
-        /// txtPriceHidden control.
+        /// lblIsRepresentative control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtPriceHidden;
+        protected global::System.Web.UI.WebControls.Label lblIsRepresentative;
 
         /// <summary>
-        /// txtCityHidden control.
+        /// cbIsRepresentative control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtCityHidden;
+        protected global::System.Web.UI.WebControls.CheckBox cbIsRepresentative;
 
         /// <summary>
-        /// txtAdressHidden control.
+        /// FileUpload control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtAdressHidden;
+        protected global::System.Web.UI.WebControls.FileUpload FileUpload;
 
         /// <summary>
-        /// txtMaxAdultsHidden control.
+        /// btnAddImg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtMaxAdultsHidden;
+        protected global::System.Web.UI.WebControls.Button btnAddImg;
 
         /// <summary>
-        /// txtMaxChildrenHidden control.
+        /// lblSelectedFileMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtMaxChildrenHidden;
+        protected global::System.Web.UI.WebControls.Label lblSelectedFileMessage;
 
         /// <summary>
-        /// txtRoomsHidden control.
+        /// lblSelectedFileError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtRoomsHidden;
-
-        /// <summary>
-        /// txtBeachDistanceHidden control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputHidden txtBeachDistanceHidden;
+        protected global::System.Web.UI.WebControls.Label lblSelectedFileError;
     }
 }
