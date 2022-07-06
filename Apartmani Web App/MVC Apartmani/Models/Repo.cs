@@ -54,5 +54,10 @@ namespace MVC_Apartmani.Models
         {
             return _repo.LoadTagsForApartment(apartmentID);
         }
+
+        internal static IList<Lib.Models.Picture> loadImagesForAparment(int apartmentID)
+        {
+            return _repo.loadImagesForAparment(apartmentID);
+        }
     }
 }

@@ -2,12 +2,12 @@ AddApart-----------------------------------
 popravi da se ne moze unest isti apart koji posotoji!!!!!
 -------------------------------------------
 mozda dodati: kada se stavi na slobodno onda se izbrisu rezervacije.
-
----------------------------------------------------------------------
 ISTESTIRAJ WEB.FORMS OPET RADI LI SVE
+---------------------------------------------------------------------
+prikaz slika (fancybox), ajax stvari i spreamjne u cookie postavka za search
 
+https://www.codeproject.com/articles/364583/a-dry-approach-to-using-fancybox-in-an-mvc-project
 Dodavanje rezervacija
-
 ajax search
 
 spremanje u cookie kako je korisnik spremao prije

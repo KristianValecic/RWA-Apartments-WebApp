@@ -20,7 +20,9 @@ namespace MVC_Apartmani
 
         protected void Application_Error()
         {
-            Response.Redirect("~/Error/Index?message=" + Server?.GetLastError().GetBaseException().Message);
+            string message = Server?.GetLastError().GetBaseException().Message;
+            message = message.Replace("\r", "").Replace("\n", "");
+            Response.Redirect("~/Error/Index?message=" + message);
         }
     }
 }

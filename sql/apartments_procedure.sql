@@ -161,6 +161,11 @@ create PROC AddImageForAparment
 	@IsRepresentative bit
 AS
 BEGIN
+	if exists (select * from ApartmentPicture where ApartmentId = @apartmentID and IsRepresentative = 1)
+	begin 
+		update ApartmentPicture set IsRepresentative = 0 where ApartmentId = @apartmentID
+	end
+
 	insert into ApartmentPicture (Guid, CreatedAt, ApartmentId, Base64Content, Name, IsRepresentative)
 	values(@GUID, GETDATE(), @apartmentID, @Base64, @name, @IsRepresentative)
 END

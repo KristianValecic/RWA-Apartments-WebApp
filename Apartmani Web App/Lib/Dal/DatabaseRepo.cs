@@ -198,7 +198,8 @@ namespace Lib.Dal
                         Address = row[nameof(Apartment.Address)].ToString(),
                         BeachDistance = (int)row[nameof(Apartment.BeachDistance)],
                         MaxAdults = (int)row[nameof(Apartment.MaxAdults)],
-                        MaxChildren = (int)row[nameof(Apartment.MaxChildren)]
+                        MaxChildren = (int)row[nameof(Apartment.MaxChildren)],
+                        Pictures = loadImagesForAparment((int)row[nameof(Apartment.ID)])// NOVO
                     });
             }
             return aparts;
@@ -271,15 +272,16 @@ namespace Lib.Dal
                         ID = (int)row[nameof(Picture.ID)],
                         Guid = row[nameof(Picture.Guid)].ToString(),
                         Name = row[nameof(Picture.Name)].ToString(),
-                        Base64 = row[nameof(Picture.Base64)].ToString()
-                    });
+                        Base64 = row[nameof(Picture.Base64)].ToString(),
+                        IsRepresentative =  (bool)row[nameof(Picture.IsRepresentative)]//(((int)row[nameof(Picture.IsRepresentative)]) == 1) ? true : false
+                    }) ;
             }
             return paths;
         }
 
         public void AddImageForAparment(Picture p, int apartID)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENTS_CS, nameof(AddImageForAparment), Guid.NewGuid(), apartID, p.Base64, p.Name, (p.IsRepresentitive ? 1 : 0));
+            SqlHelper.ExecuteNonQuery(APARTMENTS_CS, nameof(AddImageForAparment), Guid.NewGuid(), apartID, p.Base64, p.Name, (p.IsRepresentative ? 1 : 0));
         }
 
         public void DeleteImg(int imgID)

@@ -9,9 +9,22 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <img src="#" alt="representative img" />
+                    @if (Model.RepresentativePicture != null)
+                    {
+                        <img src="@Model.RepresentativePicture.Base64ForHtml" alt="representative apart img" style=" max-height: 220px;" />
+                    }
+                    @*@if (Model.Pictures != null)
+                        {
+                        foreach (var img in Model.Pictures)
+                        {
+                        if (img.IsRepresentative)
+                        {
+                        <img src="@img.Base64ForHtml" alt="representative apart img" style=" max-height: 220px;" />
+                        }
+                        }
+                        }*@
                 </div>
-                <div class="col"> 
+                <div class="col">
                     <h5><b>@Html.DisplayFor(model => model.Name)</b></h5>
                     <ul>
                         <li>Grad:  @Html.DisplayFor(model => model.City)</li>
@@ -20,7 +33,7 @@
                         <li>Max adults: @Html.DisplayFor(model => model.MaxAdults)</li>
                         <li>Max children: @Html.DisplayFor(model => model.MaxChildren)</li>
                     </ul>
-                    <p> @Html.DisplayFor(model => model.Price)€</p>                    
+                    <p>@Html.DisplayFor(model => model.Price)€</p>
                 </div>
             </div>
         </div>

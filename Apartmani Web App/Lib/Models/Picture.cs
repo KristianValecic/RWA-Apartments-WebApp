@@ -12,7 +12,7 @@ namespace Lib.Models
         public string Guid { get; set; }
         public string Base64 { get; set; }
         public string Name { get; set; }
-        public bool IsRepresentitive { get; set; }
+        public bool IsRepresentative { get; set; }
         public string Base64ForHtml
         {
             get => "data:image/jpeg;base64," + Base64;

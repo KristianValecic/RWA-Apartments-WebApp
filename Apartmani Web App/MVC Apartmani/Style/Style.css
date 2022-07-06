@@ -23,6 +23,7 @@
     width: 100%;
     background-color: white;
     text-align: left;
+    /*max-height: 400px;*/
 }
 
 #tagsList{

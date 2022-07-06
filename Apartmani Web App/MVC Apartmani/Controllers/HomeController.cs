@@ -130,7 +130,7 @@ namespace MVC_Apartmani.Controllers
             }
         }
 
-        [HttpGet] 
+        [HttpGet]
         [Authorize]
         public async Task<ActionResult> Logout()
         {
@@ -143,7 +143,9 @@ namespace MVC_Apartmani.Controllers
         //[IsAuthorized]
         public ActionResult SelectApartment(int ID)
         {
-            return View(Repo.GetApartmentById(ID));
+            Apartment apart = Repo.GetApartmentById(ID);
+            apart.Pictures = Repo.loadImagesForAparment(ID);
+            return View(apart);
         }
     }
 } 

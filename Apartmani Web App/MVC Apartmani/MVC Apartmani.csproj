@@ -181,6 +181,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Controllers\ApartmentController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -193,14 +194,11 @@
     <Compile Include="Models\Auth\UserManager.cs" />
     <Compile Include="Models\Auth\UserStoreService.cs" />
     <Compile Include="Models\CustomAttributes\IsAuthorized.cs" />
-    <Compile Include="Models\Drzava.cs" />
-    <Compile Include="Models\Grad.cs" />
     <Compile Include="Models\Kupac.cs" />
     <Compile Include="Models\Repo.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModels\LoginViewModel.cs" />
     <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
-    <Compile Include="Models\ViewModels\SelectGradVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +212,7 @@
     <Content Include="Views\Home\Register.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_ApartmentContainer.cshtml" />
+    <Content Include="Views\Home\SelectApartment.cshtml" />
     <Content Include="Content\bootstrap.rtl.min.css.map" />
     <Content Include="Content\bootstrap.rtl.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
@@ -239,7 +238,6 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
-    <Content Include="Views\Home\SelectApartment.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

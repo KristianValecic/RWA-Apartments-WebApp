@@ -227,7 +227,7 @@ namespace WebApp
                 addedPicutres.Add(new Picture
                 {
                     Name = txtImgName.Text,
-                    IsRepresentitive = cbIsRepresentative.Checked,
+                    IsRepresentative = cbIsRepresentative.Checked,
                     Base64 = GetBase64(FileUpload.FileName)
                 });
 

@@ -222,7 +222,7 @@ namespace WebApp
                     ((IRepo)Application["database"]).AddImageForAparment(new Picture
                     {
                         Name = txtImgName.Text,
-                        IsRepresentitive = cbIsRepresentative.Checked,
+                        IsRepresentative = cbIsRepresentative.Checked,
                         Base64 = base64
                     }, apartment.ID);
 

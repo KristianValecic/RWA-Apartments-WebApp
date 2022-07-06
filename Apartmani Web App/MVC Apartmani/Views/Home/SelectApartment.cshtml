@@ -14,7 +14,10 @@
                     <h1>@Html.DisplayFor(model => model.Name) - @Html.DisplayFor(model => model.City)</h1>
                     <div class="row">
                         <div class="col">
-                            <img src="#" alt="representative apart image" />
+                            @if (Model.RepresentativePicture != null)
+                            {
+                                <img src="@Model.RepresentativePicture.Base64ForHtml" alt="representative apart img" style=" max-height: 220px;" />
+                            }
                         </div>
                         <div class="col">
                             <dl class="dl-horizontal">
@@ -152,12 +155,43 @@
             <div>
                 @Html.ActionLink("Back to List", "Index", htmlAttributes: new { @class = "btn btn-secondary" }, routeValues: null)
             </div>
-            @*Slike*@
-            <div class="row">
-
+            <div class="row" id="gallery">
+                @if (Model.Pictures != null)
+                {
+                    foreach (var img in Model.Pictures)
+                    {
+                        <a 
+                            rel="group"
+                            data-fancybox="gallery"
+                            href="@img.Base64ForHtml">
+                            <img src="@img.Base64ForHtml" alt="@img.Name image" style="max-width: 400px;" class="mt-3" />
+                        </a>
+                    }
+                }
             </div>
         </div>
 
-
+    </div>
 </div>
 
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('[data-fancybox="gallery"]').fancybox({
+                cyclic: true,
+                onUpdate: function () {
+                    $(".fancybox-nav span").css({
+                        visibility: "visible"
+                    });
+                    return;
+                },
+                afterClose: function () {
+                    $(".fancybox-nav span").css({
+                        visibility: "hidden"
+                    });
+                    return;
+                }
+            });
+        });
+    </script>
+}
