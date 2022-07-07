@@ -4,9 +4,10 @@ popravi da se ne moze unest isti apart koji posotoji!!!!!
 mozda dodati: kada se stavi na slobodno onda se izbrisu rezervacije.
 ISTESTIRAJ WEB.FORMS OPET RADI LI SVE
 ---------------------------------------------------------------------
-prikaz slika (fancybox), ajax stvari i spreamjne u cookie postavka za search
+ajax stvari i spreamjne u cookie postavka za search
 
-https://www.codeproject.com/articles/364583/a-dry-approach-to-using-fancybox-in-an-mvc-project
+popravi sirinu slike
+
 Dodavanje rezervacija
 ajax search
 
@@ -23,24 +24,16 @@ uzlazno/silazno po cijeni, tako da se svodi na 3 odabira (nema/uzlazno/silazno).
 7. U cookie se spremaju parametri pretraživanja (filtriranje i sortiranje), te prikazuju i
 primjenjuju kada korisnik ponovo dođe na stranicu.
 
-8. Prikaz nađenih apartmana: neka budu prikazani samo slobodni apartmani; slika
-prikazana za apartman je ona koja je odabrana kao reprezentativna; neka bude
+8. Prikaz nađenih apartmana: neka budu prikazani samo slobodni apartmani; neka bude
 prikazano nekoliko osnovnih karakteristika: broj soba, broj mjesta za odrasle i djecu,
 po želji i koju drugu karakteristiku; ovdje iskoristite AJAX tehniku
-
-9.Za svaki apartman je moguće otvoriti stranicu s detaljima te prikazati sve podatke o
-apartmanu (reprezentativna slika, udaljenost od mora, galerija slika, tagovi...) -
-prikazano na slici 4
-
-10. Na stranici s apartmanima implementirati foto-galeriju s mogućnošću otvaranja
-pojedine slike preko ekrana; ovdje iskoristite AJAX tehniku (fancybox)
 
 11.Na stranici s detaljima nalazi se kontakt forma i gumb "Pošalji upit" (ili "Rezerviraj")
 koji omogućuje korisniku navedenu funkcionalnost. Forma treba biti unaprijed
 ispunjena korisničkim podacima u slučaju da je korisnik logiran u sustav.
 Administrator će na „Pošalji upit“ zaprimiti upit za rezervaciju od korisnika. Ako
 korisnik nije logiran u sustav, kod slanja upita za rezervaciju implementirati
-CAPTCHA ili sličnu zaštitu protiv botova. Iskoristite AJAX tehniku kod slanja obrasca.
+CAPTCHA ili sličnu zaštitu protiv botova. 
 
 12.Implementirati interakciju za korisnike koji su prijavljeni: ostavljanje ocjene, unos
 recenzije; ovdje iskoristite AJAX tehniku

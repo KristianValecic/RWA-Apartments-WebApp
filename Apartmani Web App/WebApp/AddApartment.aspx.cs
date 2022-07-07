@@ -132,7 +132,7 @@ namespace WebApp
                 foreach (ListItem reservation in lsReservations.Items)
                 {
                     Reservation tempRes = Reservation.Parse(reservation.Text);
-                    int succeeded = ((IRepo)Application["database"]).AddReservationToApartment(tempRes.UserName, tempRes.Details, tempApart.ID);
+                    int succeeded = ((IRepo)Application["database"]).AddReservationToApartment(tempRes.UserName, "", "", tempRes.Details, tempApart.ID);
                     ((IRepo)Application["database"]).SetReserved(tempApart.ID);
                 }
 

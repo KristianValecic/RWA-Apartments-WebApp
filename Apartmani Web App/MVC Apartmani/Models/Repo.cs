@@ -59,5 +59,14 @@ namespace MVC_Apartmani.Models
         {
             return _repo.loadImagesForAparment(apartmentID);
         }
+
+        internal static dynamic GetUserById(string userID)
+        {
+            return _repo.GetUserById(userID);
+        }
+        internal static dynamic AddReservationToApartment(string username, string email, string adress, string details, int apartmentID)
+        {
+            return _repo.AddReservationToApartment(username, email, adress, details, apartmentID);
+        }
     }
 }

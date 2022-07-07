@@ -73,6 +73,15 @@ BEGIN
 END
 go
 
+create PROC GetUserById
+	@UserId INT
+AS
+BEGIN
+	select * from AspNetUsers where Id = @UserId and DeletedAt is null
+END
+go
+
+
 create PROC AddUser
 	@guid uniqueidentifier,
 	@username nvarchar(250),
@@ -344,18 +353,20 @@ go*/
 --select * from dbo.funcLoadAllReservationsForApartment(3)
 
 
-create proc AddReservationToApartment
+alter proc AddReservationToApartment
 	@Guid uniqueidentifier,
 	@username nvarchar(250),
+	@Email nvarchar(250),
+	@Address nvarchar(250),
 	@details nvarchar(250),
 	@apartID int
 as
 begin
-	if not exists (select * from ApartmentReservation where UserName = @username and Details = @details)
+	declare @userid int
+	select @userid = id from AspNetUsers where UserName = @username
+
+	if not exists (select * from ApartmentReservation where (UserName = @username or UserId = @userid) and Details = @details)
 		begin
-			declare @userid int
-			select @userid = id from AspNetUsers where UserName = @username
-			
 			if @userid is not null
 				begin
 					insert into ApartmentReservation(Guid, CreatedAt, ApartmentId, Details, UserId)
@@ -363,8 +374,9 @@ begin
 				end
 			else
 				begin
-					insert into ApartmentReservation(Guid, CreatedAt, ApartmentId, Details, UserName)
-					values(@Guid, GETDATE(), @apartID, @details, @username)
+					insert into ApartmentReservation
+					(Guid, CreatedAt, ApartmentId, Details,UserName, UserEmail, UserAddress)
+					values(@Guid, GETDATE(), @apartID, @details, @username, @Email, @Address)
 				end
 			select 1 as 'Succsess'
 		end

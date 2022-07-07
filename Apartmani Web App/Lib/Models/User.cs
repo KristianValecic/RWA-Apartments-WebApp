@@ -24,7 +24,14 @@ namespace Lib.Models
             get => addressTemp;
             set
             {
-                addressTemp = $"{value}{ADRESS_DELIM} {City}";
+                if (City != null)
+                {
+                    addressTemp = $"{value}{ADRESS_DELIM} {City}";
+                }
+                else
+                {
+                    addressTemp = value;
+                }
             }
         }
         public string UserName

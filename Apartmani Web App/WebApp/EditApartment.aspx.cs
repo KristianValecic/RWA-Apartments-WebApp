@@ -13,8 +13,8 @@ namespace WebApp
 {
     public partial class EditApartment : System.Web.UI.Page
     {
-        private string Vacant = "Slobodno";
-        private string Reserved = "Rezervirano";
+        private string Vacant = "Vacant";
+        private string Reserved = "Reserved";
         private Apartment apartment;
         private Tag selectedTag;
         private IList<Tag> listofAllTags;
@@ -176,7 +176,7 @@ namespace WebApp
             {
                 ((IRepo)Application["database"]).SetReserved(((Apartment)Session["apartment"]).ID);
             }
-            if (((IRepo)Application["database"]).AddReservationToApartment(txtReservationName.Text, txtDate.Text, ((Apartment)Session["apartment"]).ID) == 0)
+            if (((IRepo)Application["database"]).AddReservationToApartment(txtReservationName.Text, "", "", txtDate.Text, ((Apartment)Session["apartment"]).ID) == 0)
             {
                 lblReservaionValidation.Visible = true;
             }

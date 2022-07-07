@@ -143,9 +143,46 @@ namespace MVC_Apartmani.Controllers
         //[IsAuthorized]
         public ActionResult SelectApartment(int ID)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                ViewBag.User = Repo.GetUserById(User.Identity.GetUserId());
+            }
+            
             Apartment apart = Repo.GetApartmentById(ID);
             apart.Pictures = Repo.loadImagesForAparment(ID);
-            return View(apart);
+            ReservationViewModel model = new ReservationViewModel
+            {
+                Apart = apart
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult SelectApartment(ReservationViewModel model)
+        {
+            Apartment apart = Repo.GetApartmentById(model.Apart.ID);
+            apart.Pictures = Repo.loadImagesForAparment(model.Apart.ID);
+            model.Apart = apart;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            //Reservation res = new Reservation { 
+            //    UserName = model.Name,
+            //    Details = model.Details
+            //};
+
+            if (Repo.AddReservationToApartment(model.Name, model.Email, model.Address, model.Details, model.Apart.ID) == 0)
+            {
+                ViewBag.IsReserved = false;
+                return View(model);
+            }
+
+
+            return View(model);
         }
     }
 } 

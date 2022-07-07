@@ -344,9 +344,9 @@ namespace Lib.Dal
             SqlHelper.ExecuteNonQuery(APARTMENTS_CS, nameof(RemoveReservationFromApartment), reservationID, apartmentID);
         }
 
-        public int AddReservationToApartment(string username, string details, int apartmentID)
+        public int AddReservationToApartment(string username,string email,string address, string details, int apartmentID)
         {
-            var tblReservations = SqlHelper.ExecuteDataset(APARTMENTS_CS, nameof(AddReservationToApartment), Guid.NewGuid(), username, details, apartmentID).Tables[0];
+            var tblReservations = SqlHelper.ExecuteDataset(APARTMENTS_CS, nameof(AddReservationToApartment), Guid.NewGuid(), username, email, address, details, apartmentID).Tables[0];
 
             if (tblReservations.Rows.Count == 0)
             {
@@ -414,6 +414,23 @@ namespace Lib.Dal
             };
         }
 
-        
+        public dynamic GetUserById(string userID)
+        {
+            var tblUsers = SqlHelper.ExecuteDataset(APARTMENTS_CS, nameof(GetUserById), userID).Tables[0];
+
+            if (tblUsers.Rows.Count == 0)
+            {
+                return null;
+            }
+
+            DataRow row = tblUsers.Rows[0];
+            return new User
+            {
+                ID = (int)row[nameof(User.ID)],
+                UserName = row[nameof(User.UserName)].ToString(),
+                Email = row[nameof(User.Email)].ToString(),
+                Address = row[nameof(User.Address)].ToString()
+            };
+        }
     }
 }

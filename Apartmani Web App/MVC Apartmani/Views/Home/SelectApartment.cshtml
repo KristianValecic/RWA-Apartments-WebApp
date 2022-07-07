@@ -1,6 +1,12 @@
-﻿@model Lib.Models.Apartment
+﻿@using MVC_Apartmani.Models.ViewModels
+@*@model Lib.Models.Apartment*@
+@model ReservationViewModel
 @{
-    IList<Lib.Models.Tag> LoadTagsForApartment = MVC_Apartmani.Models.Repo.LoadTagsForApartment(Model.ID);
+    IList<Lib.Models.Tag> LoadTagsForApartment = MVC_Apartmani.Models.Repo.LoadTagsForApartment(Model.Apart.ID);
+
+    Lib.Models.User user = (Lib.Models.User)ViewBag.User;
+
+    bool? isReserved = (bool?)ViewBag.IsReserved;
 }
 <div>
     <h4>Apartment</h4>
@@ -10,63 +16,58 @@
 
         <div class="row gx-5">
             <div class="col">
-                <div class="row ">
-                    <h1>@Html.DisplayFor(model => model.Name) - @Html.DisplayFor(model => model.City)</h1>
+                <div class="row">
+                    <h1>@Html.DisplayFor(model => model.Apart.Name) - @Html.DisplayFor(model => model.Apart.City)</h1>
                     <div class="row">
                         <div class="col">
-                            @if (Model.RepresentativePicture != null)
+                            @if (Model.Apart.RepresentativePicture != null)
                             {
-                                <img src="@Model.RepresentativePicture.Base64ForHtml" alt="representative apart img" style=" max-height: 220px;" />
+                                <img src="@Model.Apart.RepresentativePicture.Base64ForHtml" alt="representative apart img" style=" max-height: 220px;" />
                             }
                         </div>
                         <div class="col">
                             <dl class="dl-horizontal">
                                 <dd>
-                                    @Html.DisplayNameFor(model => model.Owner):
-                                    @Html.DisplayFor(model => model.Owner)
+                                    @Html.DisplayNameFor(model => model.Apart.Owner):
+                                    @Html.DisplayFor(model => model.Apart.Owner)
                                 </dd>
 
                                 <dd>
-                                    @Html.DisplayNameFor(model => model.City):
-                                    @Html.DisplayFor(model => model.City)
+                                    @Html.DisplayNameFor(model => model.Apart.City):
+                                    @Html.DisplayFor(model => model.Apart.City)
                                 </dd>
 
                                 <dd>
-                                    @Html.DisplayNameFor(model => model.Address):
-                                    @Html.DisplayFor(model => model.Address)
+                                    @Html.DisplayNameFor(model => model.Apart.Address):
+                                    @Html.DisplayFor(model => model.Apart.Address)
                                 </dd>
 
                                 <dd>
-                                    @Html.DisplayNameFor(model => model.Status):
-                                    @Html.DisplayFor(model => model.Status)
+                                    @Html.DisplayNameFor(model => model.Apart.Status):
+                                    @Html.DisplayFor(model => model.Apart.Status)
                                 </dd>
 
                                 <dd>
-                                    @Html.DisplayNameFor(model => model.Status):
-                                    @Html.DisplayFor(model => model.Status)
+                                    @Html.Label("Beach distance: ")
+                                    @Html.DisplayFor(model => model.Apart.BeachDistance)
                                 </dd>
 
                                 <dd>
-                                    @Html.DisplayNameFor(model => model.BeachDistance):
-                                    @Html.DisplayFor(model => model.BeachDistance)
+                                    @Html.Label("Max adults: ")
+                                    @Html.DisplayFor(model => model.Apart.MaxAdults)
                                 </dd>
 
                                 <dd>
-                                    @Html.DisplayNameFor(model => model.MaxAdults):
-                                    @Html.DisplayFor(model => model.MaxAdults)
-                                </dd>
-
-                                <dd>
-                                    @Html.DisplayNameFor(model => model.MaxChildren):
-                                    @Html.DisplayFor(model => model.MaxChildren)
+                                    @Html.Label("Max children: ")
+                                    @Html.DisplayFor(model => model.Apart.MaxChildren)
                                 </dd>
                             </dl>
                         </div>
                     </div>
-                    <p>@Html.DisplayFor(model => model.Price)€</p>
+                    <p>@Html.DisplayFor(model => model.Apart.Price)€</p>
                 </div>
-                <div class="row p-4">
-                    <ul id="tagsList" class="overflow-auto">
+                <div class="row">
+                    <ul id="tagsList" class="overflow-auto ps-4">
                         @if (LoadTagsForApartment.Count == 0)
                         {
                             <p>No tags for this apartment yet</p>
@@ -85,85 +86,127 @@
             <div class="col">
                 <div class="row">
                     <h1>Contact</h1>
-                    <div class="row p-2">
-                        <div class="col-2">
-                            <label for="txtFirstName" class="form-label">Name: </label>
-                        </div>
-                        <div class="col-5">
+                    @using (Html.BeginForm("SelectApartment", "Home", null, FormMethod.Post, new { role = "form" }))
+                    {
+                        @Html.HiddenFor(model => model.Apart.ID)
+                        <div class="row p-2">
+                            <div class="col-2">
+                                @*<label for="txtFirstName" class="form-label">Name: </label>*@
+                                @Html.LabelFor(model => model.Name, "Name", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col">
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                @*<input id="txtFirstName" type="text" class="form-control" />*@
+                                @if (user != null)
+                                {
+                                    @Html.TextBox(nameof(Model.Name), User.Identity.Name, new { @class = "form-control" });
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(model => model.Name, null, new { @class = "form-control" });
+                                }
+                            </div>
+                            @*<div class="col-5">
 
-                            <input id="txtFirstName" type="text" class="form-control" />
+                    <input id="txtLastName" type="text" class="form-control" />
+                </div>*@
                         </div>
-                        <div class="col-5">
 
-                            <input id="txtLastName" type="text" class="form-control" />
+                        <div class="row p-2">
+                            <div class="col-2">
+                                @*<label for="txtEmail" class="form-label">Email: </label>*@
+                                @Html.LabelFor(model => model.Email, "Email", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-10">
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                @if (user != null)
+                                {
+                                    @Html.TextBox(nameof(Model.Email), user.Email, new { @class = "form-control" });
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(model => model.Email, null, new { @class = "form-control" });
+                                }
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="row p-2">
-                        <div class="col-2">
-                            <label for="txtEmail" class="form-label">Email: </label>
+                        <div class="row p-2">
+                            <div class="col-2">
+                                @*<label for="txtAddress" class="form-label">Address: </label>*@
+                                @Html.LabelFor(model => model.Address, "Address", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-10">
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                @if (user != null)
+                                {
+                                    @Html.TextBox(nameof(Model.Address), user.Address, new { @class = "form-control" });
+                                }
+                                else
+                                {
+                                    @Html.TextBoxFor(model => model.Address, null, new { @class = "form-control" });
+                                }
+                            </div>
                         </div>
-                        <div class="col-10">
-                            <input id="txtEmail" type="text" class="form-control" />
-                        </div>
-                    </div>
 
-                    <div class="row p-2">
-                        <div class="col-2">
-                            <label for="txtAddress" class="form-label">Address: </label>
+                        <div class="row p-2">
+                            <div class="col-2">
+                                @*<label for="txtChildren" class="form-label">Children: </label>*@
+                                @Html.LabelFor(model => model.Children, "Children", htmlAttributes: new { @class = "control-label" })
+                            </div>
+                            <div class="col-6">
+                                @*<input id="txtChildren" type="number" class="form-control" />*@
+                                @Html.ValidationMessageFor(model => model.Children, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(model => model.Children, null, new { @class = "form-control" })
+                            </div>
                         </div>
-                        <div class="col-10">
-                            <input id="txtAddress" type="text" class="form-control" />
-                        </div>
-                    </div>
 
-                    <div class="row p-2">
-                        <div class="col-2">
-                            <label for="txtChildren" class="form-label">Children: </label>
+                        <div class="row p-2">
+                            <div class="col-2">
+                                <label for="txtFrom" class="form-label">From: </label>
+                            </div>
+                            <div class="col-6">
+                                @*<input id="txtFrom" type="text" class="form-control" />*@
+                                @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(model => model.From, null, new { @class = "form-control" })
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <input id="txtChildren" type="text" class="form-control" />
-                        </div>
-                    </div>
 
-
-                    <div class="row p-2">
-                        <div class="col-2">
-                            <label for="txtFrom" class="form-label">From: </label>
+                        <div class="row p-2">
+                            <div class="col-2">
+                                <label for="txtTo" class="form-label">To: </label>
+                            </div>
+                            <div class="col-6">
+                                @*<input id="txtTo" type="text" class="form-control" />*@
+                                @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+                                @Html.TextBoxFor(model => model.To, null, new { @class = "form-control" })
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <input id="txtFrom" type="text" class="form-control" />
+                        <div class="row">
+                           @if (isReserved != null && isReserved == false)
+                           {
+                                <p class="text-danger">Apartment is reserved at this time</p>
+                           }
                         </div>
-                    </div>
-
-                    <div class="row p-2">
-                        <div class="col-2">
-                            <label for="txtTo" class="form-label">To: </label>
+                        <div class="row p-2">
+                            <div class="col-10"></div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary">Reserve</button>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <input id="txtTo" type="text" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col-10"></div>
-                        <div class="col-2">
-                            <button type="submit" class="btn btn-primary">Reserve</button>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
             <div>
                 @Html.ActionLink("Back to List", "Index", htmlAttributes: new { @class = "btn btn-secondary" }, routeValues: null)
             </div>
             <div class="row" id="gallery">
-                @if (Model.Pictures != null)
+                @if (Model.Apart.Pictures != null)
                 {
-                    foreach (var img in Model.Pictures)
+                    foreach (var img in Model.Apart.Pictures)
                     {
-                        <a 
-                            rel="group"
-                            data-fancybox="gallery"
-                            href="@img.Base64ForHtml">
+                        <a rel="group"
+                           data-fancybox="gallery"
+                           href="@img.Base64ForHtml">
                             <img src="@img.Base64ForHtml" alt="@img.Name image" style="max-width: 400px;" class="mt-3" />
                         </a>
                     }
