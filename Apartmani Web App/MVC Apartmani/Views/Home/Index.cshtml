@@ -17,13 +17,22 @@
         dataValueField: "NameEng"
         );
 
+    SelectList ddlSortOptions = new SelectList(
+        items: new List<SelectListItem> {
+            new SelectListItem{ Value = "Asc"/*, Text = "Asc" */},
+            new SelectListItem{ Value = "Desc"/*, Text = "Desc" */ }
+        },
+        dataTextField: "Value",
+        dataValueField: "Value"
+        );
+
 }
 
 <div class="row mb-3">
-    <div class="col-4">
+    <div class="col-3">
         <h2>Rwa apartments</h2>
     </div>
-    <div class="col-2 p-2">
+    <div class="col p-2">
         <div class="row">
             <div class="col-4">
                 <label class="p-1">City:</label>
@@ -38,7 +47,7 @@
         </div>
     </div>
 
-    <div class="col-2 p-2">
+    <div class="col p-2">
         <div class="row">
             <div class="col-4">
                 <label class="p-1">Status:</label>
@@ -52,9 +61,40 @@
             </div>
         </div>
     </div>
+
+    <div class="col p-2">
+        <div class="row">
+            <div class="col-6">
+                <label class="p-1">Children:</label>
+            </div>
+            <div class="col-6">
+                @Html.TextBox(name: "ChildrenNumber", htmlAttributes: new { @class = "form-control", type = "number" }, value: null)
+            </div>
+        </div>
+    </div>
+    <div class="col p-2">
+        <div class="row">
+            <div class="col-6">
+                <label class="p-1">Adults:</label>
+            </div>
+            <div class="col-6">
+                @Html.TextBox(name: "AdultNumber", htmlAttributes: new { @class = "form-control", type = "number" }, value: null)
+            </div>
+        </div>
+    </div>
+    <div class="col p-2">
+        <div class="row">
+            <div class="col-6">
+                <label class="p-1">Rooms:</label>
+            </div>
+            <div class="col-6">
+                @Html.TextBox(name: "RoomNumber", htmlAttributes: new { @class = "form-control", type = "number" }, value: null)
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>
+<div class="row mb-3">
     <label>Search</label>
     <div>
         @Html.TextBox(name: "ApartmentSearch", htmlAttributes: new { @class = "form-control" }, value: null)
@@ -64,7 +104,33 @@
 <p id="info" class="row"></p>
 
 <div id="ResultsContainer" class="row mb-3">
-    <h3>Results</h3>
+    <div class="d-flex flex-wrap mb-3">
+        <h3>Results</h3>
+        <div class="d-flex flex-wrap ms-3">
+            <div class="">
+                <label class="p-1">Sort by Price</label>
+            </div>
+            <div class="">
+                @Html.DropDownList(
+                    optionLabel: "",
+                    selectList: ddlSortOptions,
+                    name: "SortID",
+                    htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="d-flex flex-wrap ms-3">
+            <div class="">
+                <label class="p-1">Sort by name</label>
+            </div>
+            <div class="">
+                @Html.DropDownList(
+                    optionLabel: "",
+                    selectList: ddlSortOptions,
+                    name: "SortName",
+                    htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
     <hr />
     <div id="Results">
     </div>
@@ -134,7 +200,7 @@
                     }
                 },
             })
-        } 
+        }
 
         $("#IDDrzava").change(FilterApartments);
         $("#IDStatus").change(FilterApartments);

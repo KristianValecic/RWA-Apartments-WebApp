@@ -4,6 +4,8 @@ popravi da se ne moze unest isti apart koji posotoji!!!!!
 mozda dodati: kada se stavi na slobodno onda se izbrisu rezervacije.
 ISTESTIRAJ WEB.FORMS OPET RADI LI SVE
 ---------------------------------------------------------------------
+DODAJ: sortove i filtere ostale(children, adults, rooms)
+
 Mozda: popravi sort id nakon sto se maknu sortovi, provjeru za unos datuma za rezervaciju 
 i provjeru ako je taj datum danas onda je occupied(ideja: na svaki load provjeri datum i ako treba promijeni)
 
@@ -12,6 +14,8 @@ ajax stvari i spreamjne u cookie postavka za search
 popravi sirinu slike
 
 spremanje u cookie kako je korisnik filtrirao prije
+
+COOKIE:https://stackoverflow.com/questions/9158225/using-cookie-in-asp-net-mvc-c-sharp
 
 User dio  MVC
 
@@ -23,10 +27,6 @@ uzlazno/silazno po cijeni, tako da se svodi na 3 odabira (nema/uzlazno/silazno).
 
 7. U cookie se spremaju parametri pretraživanja (filtriranje i sortiranje), te prikazuju i
 primjenjuju kada korisnik ponovo dođe na stranicu.
-
-8. Prikaz nađenih apartmana: neka budu prikazani samo slobodni apartmani; neka bude
-prikazano nekoliko osnovnih karakteristika: broj soba, broj mjesta za odrasle i djecu,
-po želji i koju drugu karakteristiku; ovdje iskoristite AJAX tehniku
 
 12.Implementirati interakciju za korisnike koji su prijavljeni: ostavljanje ocjene, unos
 recenzije; ovdje iskoristite AJAX tehniku
