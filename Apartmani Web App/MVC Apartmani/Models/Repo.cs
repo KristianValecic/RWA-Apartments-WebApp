@@ -60,13 +60,23 @@ namespace MVC_Apartmani.Models
             return _repo.loadImagesForAparment(apartmentID);
         }
 
-        internal static dynamic GetUserById(string userID)
+        internal static IList<Lib.Models.Status> LoadAllStatuses()
+        {
+            return _repo.LoadAllStatuses();
+        }
+
+        internal static Lib.Models.User GetUserById(string userID)
         {
             return _repo.GetUserById(userID);
         }
-        internal static dynamic AddReservationToApartment(string username, string email, string adress, string details, int apartmentID)
+        internal static int AddReservationToApartment(string username, string email, string adress, string details, int apartmentID)
         {
             return _repo.AddReservationToApartment(username, email, adress, details, apartmentID);
+        }
+
+        internal static IList<Lib.Models.City> LoadAllCities()
+        {
+            return _repo.LoadAllCities();
         }
     }
 }

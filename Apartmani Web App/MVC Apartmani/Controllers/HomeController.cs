@@ -51,7 +51,15 @@ namespace MVC_Apartmani.Controllers
         //[IsAuthorized]
         public ActionResult Index()
         {
-            List<Apartment> model = Repo.LoadAllApartments().ToList();
+            //List<Apartment> model = Repo.LoadAllApartments().ToList();
+
+            IndexApartmentViewModel model = new IndexApartmentViewModel
+            {
+                Apartments = Repo.LoadAllApartments().ToList(),
+                Cities = Repo.LoadAllCities(),
+                Statuses = Repo.LoadAllStatuses(),
+            };
+
             return View(model);
         }
 

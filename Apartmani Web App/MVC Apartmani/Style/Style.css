@@ -1,12 +1,14 @@
 ﻿body {
 }
 
-#homeApartContainer {
+#homeApartContainer, #Results{
     display: flex;
     float: none;
     flex-wrap: wrap;
     gap: 12px;
 }
+
+
 
 #formAparts{
     width: 32%;

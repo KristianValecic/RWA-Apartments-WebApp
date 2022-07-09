@@ -1,14 +1,28 @@
-﻿@model IEnumerable<Lib.Models.Apartment>
+﻿@*@model IEnumerable<Lib.Models.Apartment>*@
+@using MVC_Apartmani.Models.ViewModels
+@model IndexApartmentViewModel
 
 @{
     ViewBag.Title = "Index";
+
+    SelectList ddlCities = new SelectList(
+        items: Model.Cities,
+        dataTextField: "Name",
+        dataValueField: "Name"
+        );
+
+    SelectList ddlStatuses = new SelectList(
+        items: Model.Statuses,
+        dataTextField: "NameEng",
+        dataValueField: "NameEng"
+        );
+
 }
 
 <div class="row mb-3">
     <div class="col-4">
         <h2>Rwa apartments</h2>
     </div>
-
     <div class="col-2 p-2">
         <div class="row">
             <div class="col-4">
@@ -16,13 +30,8 @@
             </div>
             <div class="col-8">
                 @Html.DropDownList(
-                    selectList:
-                    //new List<SelectListItem>
-                    //{
-                    //      new SelectListItem { Text = "IT", Value = "1", Selected=true},
-                    //      new SelectListItem { Text = "HR", Value = "2"},
-                    //      new SelectListItem { Text = "Payroll", Value = "3"}
-                    //},
+                    optionLabel: "",
+                    selectList: ddlCities,
                     name: "IDDrzava",
                     htmlAttributes: new { @class = "form-control" })
             </div>
@@ -36,13 +45,9 @@
             </div>
             <div class="col-8">
                 @Html.DropDownList(
-                    selectList: new List<SelectListItem>
-                    {
-                          new SelectListItem { Text = "IT", Value = "1", Selected=true},
-                          new SelectListItem { Text = "HR", Value = "2"},
-                          new SelectListItem { Text = "Payroll", Value = "3"}
-                    },
-                    name: "IDDrzava",
+                    optionLabel: "",
+                    selectList: ddlStatuses,
+                    name: "IDStatus",
                     htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
@@ -58,14 +63,16 @@
 
 <p id="info" class="row"></p>
 
-<div id="Results" class="row mb-3">
+<div id="ResultsContainer" class="row mb-3">
     <h3>Results</h3>
     <hr />
+    <div id="Results">
+    </div>
 </div>
 
-<div id="homeApartContainer" class="flex-wrap">
+<div id="homeApartContainer">
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Apartments)
     {
         @Html.Partial(partialViewName: "_ApartmentContainer", model: item)
     }
@@ -77,7 +84,7 @@
     $("#Results").hide();
 
         $("#ApartmentSearch").autocomplete({
-            source: '@Url.Action(actionName: "getAutocompleteApartments", controllerName:"Ajax")',
+            source: '@Url.Action(actionName: "GetAutocompleteApartments", controllerName:"Ajax")',
             minLength: 0,
             select: function (e, ui) {
                 e.preventDefault();
@@ -86,7 +93,7 @@
                     id: ui.item.value
                 };
                 $(this).val(apartment.name);
-                showApartments(apartment.id);
+               showApartments(apartment.id);
             },
             search: function (e, ui) {
                 if ($("#ApartmentSearch").val() == "") {
@@ -100,11 +107,10 @@
             }
         });
 
-
         function showApartments(id){
             $.ajax({
                 method: 'GET',
-                url: '@Url.Action(actionName: "getApartments", controllerName:"Ajax")',
+                url: '@Url.Action(actionName: "GetApartments", controllerName:"Ajax")',
                 data: { id },
                 success: function (apartments) {
                     if (apartments != null) {
@@ -128,7 +134,43 @@
                     }
                 },
             })
-        }
+        } 
+
+        $("#IDDrzava").change(FilterApartments);
+        $("#IDStatus").change(FilterApartments);
+
+             function FilterApartments(){
+                $.ajax({
+                    method: 'GET',
+                    url: '@Url.Action(actionName: "SortApartments", controllerName:"Ajax")',
+                    data: {
+                        city: $("#IDDrzava").val(),
+                        status: $("#IDStatus").val()
+                    },
+                    success: function (apartments) {
+                        if (apartments != null) {
+                            $("#Results").empty();
+                            $("#Results").fadeIn(500);
+                            $("#homeApartContainer").hide();
+                            $('p#info').html("");
+
+                            $(apartments).each(function (index, apart) {
+                                $.ajax({
+                                    method: 'GET',
+                                    url: '@Url.Action(actionName: "getSingleApartment", controllerName:"Ajax")',
+                                    data: { id: apart.ID },
+                                    success: function (data) {
+                                        $('#Results').append(data);
+                                    }
+                                })
+                            })
+                        } else {
+                            $("#Results").hide();
+                            $('p#info').html("Nema tog apartmana.");
+                        }
+                    },
+                })
+            };
 
         function getDateFromJSON(jsonDate) {
             var startIndex = jsonDate.indexOf("(") + 1;
