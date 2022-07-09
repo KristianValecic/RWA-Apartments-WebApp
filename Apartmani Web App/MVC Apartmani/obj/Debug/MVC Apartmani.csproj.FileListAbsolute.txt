@@ -96,8 +96,6 @@ D:\Faks\RWA\Apartmani Web App\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apar
 D:\Faks\RWA\Apartmani Web App\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apartmani.csproj.CopyComplete
 D:\Faks\RWA\Apartmani Web App\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apartmani.dll
 D:\Faks\RWA\Apartmani Web App\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apartmani.pdb
-D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apartmani.csproj.AssemblyReference.cache
-D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apartmani.csproj.CoreCompileInputs.cache
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\MVC Apartmani.dll.config
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\MVC Apartmani.dll
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\MVC Apartmani.pdb
@@ -165,7 +163,10 @@ D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\Microsoft.
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\Newtonsoft.Json.dll
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\Owin.dll
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\RouteDebugger.dll
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Net.Http.Formatting.dll
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Helpers.dll
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Http.dll
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Http.WebHost.dll
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Mvc.dll
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Optimization.dll
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Razor.dll
@@ -184,13 +185,19 @@ D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\Microsoft.
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\Microsoft.Owin.Security.Cookies.xml
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\Microsoft.Owin.Security.OAuth.xml
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\Newtonsoft.Json.xml
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Net.Http.Formatting.xml
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Helpers.xml
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Http.xml
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Http.WebHost.xml
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Mvc.xml
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Optimization.xml
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.Razor.xml
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.WebPages.xml
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.WebPages.Deployment.xml
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\System.Web.WebPages.Razor.xml
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apartmani.csproj.AssemblyReference.cache
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apartmani.csproj.CoreCompileInputs.cache
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apartmani.csproj.CopyComplete
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apartmani.dll
 D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\obj\Debug\MVC Apartmani.pdb
+D:\Faks\RWA\RWA-Apartments-WebApp\Apartmani Web App\MVC Apartmani\bin\Recaptcha.Web.dll

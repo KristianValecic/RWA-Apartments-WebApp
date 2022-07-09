@@ -12,12 +12,14 @@ namespace MVC_Apartmani.App_Start
         {
             bundels.Add(new StyleBundle("~/Content").Include(
                 "~/Content/bootstrap.min.css",
-                "~/Content/jquery.fancybox.css"
+                "~/Content/jquery.fancybox.css",
+                "~/Content/jquery-ui.css"
             ));
 
             bundels.Add(new ScriptBundle("~/Scripts").Include(
                 "~/Scripts/jquery-3.6.0.min.js",
                 "~/Scripts/bootstrap.min.js",
+                "~/Scripts/jquery-ui.js",
                 "~/Scripts/jquery.fancybox.pack.js",
                 "~/Scripts/jquery.fancybox.js",
                 "~/Scripts/jquery.fancybox-buttons.js",

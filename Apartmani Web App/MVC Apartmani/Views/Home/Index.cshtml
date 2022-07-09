@@ -4,11 +4,64 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Rwa apartments</h2>
+<div class="row mb-3">
+    <div class="col-4">
+        <h2>Rwa apartments</h2>
+    </div>
 
-<p>
-    @*@Html.ActionLink("Create New", "Create")*@
-</p>
+    <div class="col-2 p-2">
+        <div class="row">
+            <div class="col-4">
+                <label class="p-1">City:</label>
+            </div>
+            <div class="col-8">
+                @Html.DropDownList(
+                    selectList:
+                    //new List<SelectListItem>
+                    //{
+                    //      new SelectListItem { Text = "IT", Value = "1", Selected=true},
+                    //      new SelectListItem { Text = "HR", Value = "2"},
+                    //      new SelectListItem { Text = "Payroll", Value = "3"}
+                    //},
+                    name: "IDDrzava",
+                    htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+    <div class="col-2 p-2">
+        <div class="row">
+            <div class="col-4">
+                <label class="p-1">Status:</label>
+            </div>
+            <div class="col-8">
+                @Html.DropDownList(
+                    selectList: new List<SelectListItem>
+                    {
+                          new SelectListItem { Text = "IT", Value = "1", Selected=true},
+                          new SelectListItem { Text = "HR", Value = "2"},
+                          new SelectListItem { Text = "Payroll", Value = "3"}
+                    },
+                    name: "IDDrzava",
+                    htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <label>Search</label>
+    <div>
+        @Html.TextBox(name: "ApartmentSearch", htmlAttributes: new { @class = "form-control" }, value: null)
+    </div>
+</div>
+
+<p id="info" class="row"></p>
+
+<div id="Results" class="row mb-3">
+    <h3>Results</h3>
+    <hr />
+</div>
 
 <div id="homeApartContainer" class="flex-wrap">
 
@@ -17,3 +70,72 @@
         @Html.Partial(partialViewName: "_ApartmentContainer", model: item)
     }
 </div>
+
+@section scripts {
+    <script>
+
+    $("#Results").hide();
+
+        $("#ApartmentSearch").autocomplete({
+            source: '@Url.Action(actionName: "getAutocompleteApartments", controllerName:"Ajax")',
+            minLength: 0,
+            select: function (e, ui) {
+                e.preventDefault();
+                const apartment = {
+                    name: ui.item.label,
+                    id: ui.item.value
+                };
+                $(this).val(apartment.name);
+                showApartments(apartment.id);
+            },
+            search: function (e, ui) {
+                if ($("#ApartmentSearch").val() == "") {
+                    $("#Results").hide();
+                    $("#homeApartContainer").show();
+                }
+            },
+            focus: function (e, ui) {
+                e.preventDefault();
+                $(this).val(ui.item.label);
+            }
+        });
+
+
+        function showApartments(id){
+            $.ajax({
+                method: 'GET',
+                url: '@Url.Action(actionName: "getApartments", controllerName:"Ajax")',
+                data: { id },
+                success: function (apartments) {
+                    if (apartments != null) {
+                        $("#Results").fadeIn(500);
+                        $("#homeApartContainer").hide();
+                        $('p#info').html("");
+
+                        $(apartments).each(function (index, apart) {
+                            $.ajax({
+                                method: 'GET',
+                                url: '@Url.Action(actionName: "getSingleApartment", controllerName:"Ajax")',
+                                data: { id },
+                                success: function (data) {
+                                    $('#Results').empty().append(data);
+                                }
+                            })
+                    })
+                    } else {
+                        $("#Results").hide();
+                        $('p#info').html("Nema tog apartmana.");
+                    }
+                },
+            })
+        }
+
+        function getDateFromJSON(jsonDate) {
+            var startIndex = jsonDate.indexOf("(") + 1;
+            var endIndex = jsonDate.lastIndexOf(")");
+            var ms = Number(jsonDate.substring(startIndex, endIndex));
+            return new Date(ms).toLocaleDateString();
+        }
+
+    </script>
+}

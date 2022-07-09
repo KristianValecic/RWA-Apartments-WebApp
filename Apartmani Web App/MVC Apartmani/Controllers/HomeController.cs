@@ -5,6 +5,7 @@ using MVC_Apartmani.Models;
 using MVC_Apartmani.Models.Auth;
 using MVC_Apartmani.Models.CustomAttributes;
 using MVC_Apartmani.Models.ViewModels;
+using Recaptcha.Web.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -165,20 +166,40 @@ namespace MVC_Apartmani.Controllers
             apart.Pictures = Repo.loadImagesForAparment(model.Apart.ID);
             model.Apart = apart;
 
+            if (!User.Identity.IsAuthenticated)
+            {
+                var recaptchaHelper = this.GetRecaptchaVerificationHelper();
+                if (String.IsNullOrEmpty(recaptchaHelper.Response))
+                {
+                    ModelState.AddModelError(
+                    "",
+                    "Captcha answer cannot be empty.");
+                    return View(model);
+                }
+
+                var recaptchaResult = recaptchaHelper.VerifyRecaptchaResponse();
+                if (!recaptchaResult.Success)
+                {
+                    ModelState.AddModelError(
+                    "",
+                    "Incorrect captcha answer.");
+                    return View(model);
+                } 
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            //Reservation res = new Reservation { 
-            //    UserName = model.Name,
-            //    Details = model.Details
-            //};
-
             if (Repo.AddReservationToApartment(model.Name, model.Email, model.Address, model.Details, model.Apart.ID) == 0)
             {
                 ViewBag.IsReserved = false;
                 return View(model);
+            }
+            else
+            {
+                ViewBag.IsReserved = true;
             }
 
 
