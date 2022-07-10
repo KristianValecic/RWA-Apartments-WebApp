@@ -4,7 +4,7 @@ popravi da se ne moze unest isti apart koji posotoji!!!!!
 mozda dodati: kada se stavi na slobodno onda se izbrisu rezervacije.
 ISTESTIRAJ WEB.FORMS OPET RADI LI SVE
 ---------------------------------------------------------------------
-DODAJ: sortove i filtere ostale(children, adults, rooms)
+POPRAVI: sort liste
 
 Mozda: popravi sort id nakon sto se maknu sortovi, provjeru za unos datuma za rezervaciju 
 i provjeru ako je taj datum danas onda je occupied(ideja: na svaki load provjeri datum i ako treba promijeni)

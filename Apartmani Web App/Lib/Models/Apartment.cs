@@ -43,5 +43,8 @@ namespace Lib.Models
             }
         }
         public Picture RepresentativePicture { get => _representativePicture; }
+
+        public override bool Equals(object obj)
+        => obj is Apartment other && other.Name.Equals(Name) && other.Price.Equals(Price) && other.BeachDistance.Equals(BeachDistance);
     }
 }

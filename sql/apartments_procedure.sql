@@ -442,7 +442,7 @@ create proc GetApartmentById
 as
 begin
 	select a.Id, a.Guid, a.name, c.Name as 'city', o.Name as 'owner', Price,
-	a.MaxAdults, a.MaxChildren, a.TotalRooms, s.Name as 'Status', a.Address, a.BeachDistance
+	a.MaxAdults, a.MaxChildren, a.TotalRooms, s.NameEng as 'Status', a.Address, a.BeachDistance
 	from Apartment as a
 	inner join City as c on
 	a.CityId = c.Id

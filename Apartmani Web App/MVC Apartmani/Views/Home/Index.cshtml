@@ -19,8 +19,8 @@
 
     SelectList ddlSortOptions = new SelectList(
         items: new List<SelectListItem> {
-            new SelectListItem{ Value = "Asc"/*, Text = "Asc" */},
-            new SelectListItem{ Value = "Desc"/*, Text = "Desc" */ }
+            new SelectListItem{ Value = "Asc"},
+            new SelectListItem{ Value = "Desc"}
         },
         dataTextField: "Value",
         dataValueField: "Value"
@@ -96,8 +96,11 @@
 
 <div class="row mb-3">
     <label>Search</label>
-    <div>
+    <div class="col-10">
         @Html.TextBox(name: "ApartmentSearch", htmlAttributes: new { @class = "form-control" }, value: null)
+    </div>
+    <div class="col-2">
+        <button id="btnSearch" class="btn btn-primary">Filter results</button>
     </div>
 </div>
 
@@ -114,7 +117,7 @@
                 @Html.DropDownList(
                     optionLabel: "",
                     selectList: ddlSortOptions,
-                    name: "SortID",
+                    name: "SortPrice",
                     htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
@@ -187,8 +190,8 @@
                         $(apartments).each(function (index, apart) {
                             $.ajax({
                                 method: 'GET',
-                                url: '@Url.Action(actionName: "getSingleApartment", controllerName:"Ajax")',
-                                data: { id },
+                                url: '@Url.Action(actionName: "GetSingleApartment", controllerName:"Ajax")',
+                                data: { id: apart.ID },
                                 success: function (data) {
                                     $('#Results').empty().append(data);
                                 }
@@ -202,16 +205,25 @@
             })
         }
 
+        $("#btnSearch").click(FilterApartments);
+        //$("#btnSearch").click(showApartments());
+
         $("#IDDrzava").change(FilterApartments);
         $("#IDStatus").change(FilterApartments);
+        $("#ChildrenNumber").change(FilterApartments);
+        $("#AdultNumber").change(FilterApartments);
+        $("#RoomNumber").change(FilterApartments);
 
-             function FilterApartments(){
+        function FilterApartments() {
                 $.ajax({
                     method: 'GET',
-                    url: '@Url.Action(actionName: "SortApartments", controllerName:"Ajax")',
+                    url: '@Url.Action(actionName: "FilterApartments", controllerName:"Ajax")',
                     data: {
                         city: $("#IDDrzava").val(),
-                        status: $("#IDStatus").val()
+                        status: $("#IDStatus").val(),
+                        children: $("#ChildrenNumber").val(),
+                        adults: $("#AdultNumber").val(),
+                        rooms: $("#RoomNumber").val()
                     },
                     success: function (apartments) {
                         if (apartments != null) {
@@ -223,7 +235,43 @@
                             $(apartments).each(function (index, apart) {
                                 $.ajax({
                                     method: 'GET',
-                                    url: '@Url.Action(actionName: "getSingleApartment", controllerName:"Ajax")',
+                                    url: '@Url.Action(actionName: "GetSingleApartment", controllerName:"Ajax")',
+                                    data: { id: apart.ID },
+                                    success: function (data) {
+                                        $('#Results').append(data);
+                                    }
+                                })
+                            })
+                        } else {
+                            $("#Results").hide();
+                            $('p#info').html("Nema tog apartmana.");
+                        }
+                    },
+                })
+            };
+
+        $("#SortPrice").change(SortApartments);
+        $("#SortName").change(SortApartments);
+
+        function SortApartments() {
+                $.ajax({
+                    method: 'GET',
+                    url: '@Url.Action(actionName: "SortApartments", controllerName:"Ajax")',
+                    data: {
+                        price: $("#SortPrice").val(),
+                        name: $("#SortName").val()
+                    },
+                    success: function (apartments) {
+                        if (apartments != null) {
+                            $("#Results").empty();
+                            $("#Results").fadeIn(500);
+                            $("#homeApartContainer").hide();
+                            $('p#info').html("");
+
+                            $(apartments).each(function (index, apart) {
+                                $.ajax({
+                                    method: 'GET',
+                                    url: '@Url.Action(actionName: "GetSingleApartment", controllerName:"Ajax")',
                                     data: { id: apart.ID },
                                     success: function (data) {
                                         $('#Results').append(data);
