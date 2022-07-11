@@ -6,7 +6,7 @@ ISTESTIRAJ WEB.FORMS OPET RADI LI SVE
 ---------------------------------------------------------------------
 POPRAVI: sort liste
 
-Mozda: popravi sort id nakon sto se maknu sortovi, provjeru za unos datuma za rezervaciju 
+Mozda: provjeru za unos datuma za rezervaciju 
 i provjeru ako je taj datum danas onda je occupied(ideja: na svaki load provjeri datum i ako treba promijeni)
 
 ajax stvari i spreamjne u cookie postavka za search
