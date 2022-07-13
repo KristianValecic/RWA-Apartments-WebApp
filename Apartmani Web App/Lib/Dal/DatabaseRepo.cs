@@ -219,10 +219,18 @@ namespace Lib.Dal
             SqlHelper.ExecuteNonQuery(APARTMENTS_CS, nameof(DeleteApartment), apartmentID);
         }
 
-        public void AddApartment(Apartment apartment)
+        public int AddApartment(Apartment apartment)
         {
-            SqlHelper.ExecuteNonQuery(APARTMENTS_CS, nameof(AddApartment), Guid.NewGuid(), Guid.NewGuid(), apartment.Name, apartment.Owner, apartment.City,
-                apartment.Address, apartment.MaxChildren, apartment.MaxAdults, apartment.Status, apartment.Price, apartment.TotalRooms, apartment.BeachDistance);
+           var tblAddApart =  SqlHelper.ExecuteDataset(APARTMENTS_CS, nameof(AddApartment), Guid.NewGuid(), Guid.NewGuid(), apartment.Name, apartment.Owner, apartment.City,
+                apartment.Address, apartment.MaxChildren, apartment.MaxAdults, apartment.Status, apartment.Price, apartment.TotalRooms, apartment.BeachDistance).Tables[0];
+
+            if (tblAddApart.Rows.Count == 0)
+            {
+                return 0;
+            }
+
+            DataRow row = tblAddApart.Rows[0];
+            return (int)row["Succsess"];
         }
 
         public IList<Status> LoadAllStatuses()

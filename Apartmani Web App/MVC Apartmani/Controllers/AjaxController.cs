@@ -14,7 +14,6 @@ namespace MVC_Apartmani.Controllers
         private const string NAME = "Name";
         private const string PRICE = "Price";
         private static IEnumerable<Lib.Models.Apartment> _displayedApartments;
-        //private SortedList<Lib.Models.Apartment, Lib.Models.Apartment> _displayedApartments;
 
         // GET: Ajax
         public ActionResult GetAutocompleteApartments(string term)
@@ -96,11 +95,11 @@ namespace MVC_Apartmani.Controllers
         {
             if (sortType == ASC)
             {
-                _displayedApartments = _displayedApartments.OrderBy(a => a.Name); //ToList().Sort((a, b) => a.Name.CompareTo(b.Name)); 
+                _displayedApartments = _displayedApartments.OrderBy(a => a.Name);
             }
             else if (sortType == DESC)
             {
-                _displayedApartments = _displayedApartments.OrderByDescending(a => a.Name); //ToList().Sort((a, b) => -a.Name.First().CompareTo(b.Name.First()));
+                _displayedApartments = _displayedApartments.OrderByDescending(a => a.Name);
             }
         }
 
@@ -108,11 +107,11 @@ namespace MVC_Apartmani.Controllers
         {
             if (sortType == ASC)
             {
-                _displayedApartments = _displayedApartments.OrderBy(a => a.Price); //ToList().Sort((a, b) => a.Price.CompareTo(b.Price));
+                _displayedApartments = _displayedApartments.OrderBy(a => a.Price); 
             }
             else if (sortType == DESC)
             {
-                _displayedApartments = _displayedApartments.OrderByDescending(a => a.Price); //ToList().Sort((a, b) => -a.Price.CompareTo(b.Price));
+                _displayedApartments = _displayedApartments.OrderByDescending(a => a.Price); 
             }
         }
     }

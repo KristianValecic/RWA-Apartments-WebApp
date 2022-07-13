@@ -183,7 +183,7 @@
                             <div class="col-6">
                                 @*<input id="txtFrom" type="text" class="form-control" />*@
                                 @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
-                                @Html.TextBoxFor(model => model.From, null, new { @class = "form-control" })
+                                @Html.TextBoxFor(model => model.From, null, new { @class = "form-control", type = "date" })
                             </div>
                         </div>
 
@@ -194,37 +194,42 @@
                             <div class="col-6">
                                 @*<input id="txtTo" type="text" class="form-control" />*@
                                 @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
-                                @Html.TextBoxFor(model => model.To, null, new { @class = "form-control" })
+                                @Html.TextBoxFor(model => model.To, null, new { @class = "form-control", type = "date" })
                             </div>
                         </div>
                         <div class="row">
                             @if (isReserved != null && isReserved == false)
                             {
-                                <p class="text-danger">Apartment is reserved at this time</p>
+                                <div class="alert alert-danger">
+                                    <p>Apartment is reserved at this time</p>
+                                </div>
                             }
                             else if (isReserved != null && isReserved == true)
                             {
-                                <p class="table-success">Apartment is reserved successfully</p>
+                                <div class="alert alert-success">
+                                    <p class="table-success">Apartment is reserved successfully</p>
+                                </div>
+
                             }
                         </div>
-                        <div class="row p-2">
-                            @Html.RecaptchaWidget()
+                                <div class="row p-2">
+                                    @Html.RecaptchaWidget()
 
-                            @if (!ViewData.ModelState.IsValid)
-                            {
-                                <div class="alert alert-danger">
-                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                                    @Html.ValidationSummary()
+                                    @if (!ViewData.ModelState.IsValid)
+                                    {
+                                        <div class="alert alert-danger">
+                                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                            @Html.ValidationSummary()
+                                        </div>
+                                    }
+                                    <div class="col-10"></div>
+                                    <div class="col-2">
+                                        <button type="submit" class="btn btn-primary">Reserve</button>
+                                    </div>
+
                                 </div>
                             }
-                            <div class="col-10"></div>
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-primary">Reserve</button>
-                            </div>
-
                         </div>
-                    }
-                </div>
             </div>
             <div>
                 @Html.ActionLink("Back to List", "Index", htmlAttributes: new { @class = "btn btn-secondary float-end" }, routeValues: null)

@@ -138,28 +138,39 @@
                                     </div>
                                     <div class="col-2">
                                         <asp:Button ID="btnAddReservation" CssClass=" btn btn-primary" OnClick="btnAddReservation_Click"
-                                            runat="server" Text="Add reservation" />
+                                            runat="server" Text="Add reservation" ValidationGroup="reservationValidation"/>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-1">
-                                        <asp:Label ID="Label3" runat="server" Text="Date"></asp:Label>
+                                        <asp:Label ID="Label3" runat="server" Text="From"></asp:Label>
                                     </div>
                                     <div class="col-7">
-                                        <asp:TextBox ID="txtDate" CssClass="form-control " runat="server"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtDate"
-                                            ForeColor="red" ValidationGroup="reservationValidation">Required field</asp:RequiredFieldValidator>
+                                            <asp:TextBox ID="txtFromDate" CssClass="form-control " runat="server" type="date"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="txtFromDate"
+                                                ForeColor="red" ValidationGroup="reservationValidation">Required field</asp:RequiredFieldValidator>
+                                            
                                     </div>
-                                    <div class="col-2">
-                                        <%--Ovo se pokaze samo kada je selektan tag iz lise--%>
+                                    <div class="col-3">
                                         <asp:Button ID="btnDeleteReservation" CssClass=" btn btn-danger" runat="server" Text="Delete reservation"
                                             Visible="false" OnClick="btnDeleteReservation_Click" CausesValidation="false" />
                                     </div>
-                                    <asp:Label ID="lblReservaionValidation" runat="server" Visible="false" ForeColor="Red"
-                                        ValidationGroup="reservationValidation">Reservation already exists.</asp:Label>
                                 </div>
-                        </div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <asp:Label ID="Label2" runat="server" Text="To"></asp:Label>
+                                    </div>
+                                    <div class="col-7">
+                                            
+                                            <asp:TextBox ID="txtToDate" CssClass="form-control " runat="server" type="date"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="txtToDate"
+                                                ForeColor="red" ValidationGroup="reservationValidation">Required field</asp:RequiredFieldValidator>
+                                    </div>
+                                </div>
+                                <asp:Label ID="lblReservaionValidation" runat="server" Visible="false" ForeColor="Red"
+                                        ValidationGroup="reservationValidation">Reservation already exists.</asp:Label>
                         </fieldset>
+                        </div>
                     </div>
                 </div>
             </div>

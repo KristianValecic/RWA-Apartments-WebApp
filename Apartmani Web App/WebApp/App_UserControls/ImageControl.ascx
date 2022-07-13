@@ -13,5 +13,6 @@
 
     <asp:Button ID="deleteImg" runat="server" Text="Delete" class="btn btn-danger" OnClick="deleteImg_Click" />
 
+    <asp:Label ID="lblRep" runat="server" Text="<%# Eval(nameof(Lib.Models.Picture.IsRepresentative))%>"></asp:Label>
 
 </div>

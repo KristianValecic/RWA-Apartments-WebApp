@@ -14,7 +14,14 @@ namespace WebApp.App_UserControls
         
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            if (lblRep.Text == "True" || lblRep.Text == "true")
+            {
+                lblRep.Text = "Representative";
+            }
+            else
+            {
+                lblRep.Text = "";
+            }
         }
 
         protected void deleteImg_Click(object sender, EventArgs e)

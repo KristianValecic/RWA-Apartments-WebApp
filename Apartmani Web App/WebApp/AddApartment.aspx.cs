@@ -27,10 +27,10 @@ namespace WebApp
                 Response.Redirect("Default");
             }
 
+                LoadListBox();
             if (!IsPostBack)
             {
                 LoadDdl();
-                LoadListBox();
                 LoadImgs();
                 if (Session["Apartment"] != null)
                 {
@@ -118,7 +118,11 @@ namespace WebApp
                 BeachDistance = int.Parse(txtBeachDistance.Text)
             };
 
-            ((IRepo)Application["database"]).AddApartment(tempApartment);
+            if (((IRepo)Application["database"]).AddApartment(tempApartment) == 0)
+            {
+                ApartmentExistsValidation.Visible = true;
+                return;
+            } 
 
             Apartment tempApart = (Apartment)((IRepo)Application["database"]).GetApartment(tempApartment.Name, tempApartment.Owner, tempApartment.Address);
 
@@ -206,13 +210,30 @@ namespace WebApp
 
         protected void btnAddReservation_Click(object sender, EventArgs e)
         {
+            if (!CheckReservation($"{txtFromDate.Text} - {txtToDate.Text}"))
+            {
+                lblReservaionValidation.Visible = true;
+                return;
+            }
             tempReservations.Add(new Reservation
             {
                 UserName = txtReservationName.Text,
-                Details = txtDate.Text
+                Details = $"{txtFromDate.Text} - {txtToDate.Text}"
             });
 
             Response.Redirect(Request.Url.LocalPath);
+        }
+
+        private bool CheckReservation(string period)
+        {
+            foreach (var reservation in tempReservations)
+            {
+                if (reservation.Details == period)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         protected void lsReservations_SelectedIndexChanged(object sender, EventArgs e)

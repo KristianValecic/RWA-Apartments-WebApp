@@ -1,16 +1,14 @@
 AddApart-----------------------------------
 popravi da se ne moze unest isti apart koji posotoji!!!!!
+AKO POLJE S DATUMOM PRAZNO NE VALJA
 -------------------------------------------
 mozda dodati: kada se stavi na slobodno onda se izbrisu rezervacije.
 ISTESTIRAJ WEB.FORMS OPET RADI LI SVE
 ---------------------------------------------------------------------
-NAPRAVITI DA SE UCITAJU OCJENE U APARTU AKO I IMA (procedura, model, ispis to treba prilagodit da cuva rating)
-POPRAVI: Rating se mora prikazati samo logiranom useru, sort liste
-
 Mozda: provjeru za unos datuma za rezervaciju 
 i provjeru ako je taj datum danas onda je occupied(ideja: na svaki load provjeri datum i ako treba promijeni)
 
-ajax stvari i spreamjne u cookie postavka za search
+spreamjne u cookie postavka za search
 
 spremanje u cookie kako je korisnik filtrirao prije
 

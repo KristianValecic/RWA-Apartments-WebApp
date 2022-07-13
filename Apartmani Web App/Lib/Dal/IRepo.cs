@@ -22,7 +22,7 @@ namespace Lib.Dal
         IList<City> LoadAllCities();
         void UpdateApartment(Apartment apartment);
         void DeleteApartment(int apartmentID);
-        void AddApartment(Apartment apartment);
+        int AddApartment(Apartment apartment);
         IList<Status> LoadAllStatuses();
         IList<Tag> LoadTagsForApartment(int apartID);
         IList<Picture> LoadImagesForAparment(int apartmentID);

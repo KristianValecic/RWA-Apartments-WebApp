@@ -176,7 +176,7 @@ namespace WebApp
             {
                 ((IRepo)Application["database"]).SetReserved(((Apartment)Session["apartment"]).ID);
             }
-            if (((IRepo)Application["database"]).AddReservationToApartment(txtReservationName.Text, "", "", txtDate.Text, ((Apartment)Session["apartment"]).ID) == 0)
+            if (((IRepo)Application["database"]).AddReservationToApartment(txtReservationName.Text, "", "", FormatDates(txtFromDate.Text, txtToDate.Text), ((Apartment)Session["apartment"]).ID) == 0)
             {
                 lblReservaionValidation.Visible = true;
             }
@@ -187,6 +187,11 @@ namespace WebApp
                 LoadData();
                 Response.Redirect(Request.Url.LocalPath);
             }
+        }
+
+        private string FormatDates(string from, string to)
+        {
+            return $"{from} - {to}";
         }
 
         protected void lsReservations_SelectedIndexChanged(object sender, EventArgs e)

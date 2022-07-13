@@ -245,7 +245,7 @@ create PROC AddApartment
 	@BeachDistance int
 AS
 BEGIN
-	declare @StatusId int, @CityId int, @OwnerId nvarchar(250)---, @TypeId nvarchar(250)
+	declare @StatusId int, @CityId int, @OwnerId nvarchar(250)
 
 	select @StatusId = id from ApartmentStatus 
 	where NameEng = @Status
@@ -262,20 +262,25 @@ BEGIN
 	else
 	begin 
 		insert into ApartmentOwner(Guid, CreatedAt, Name)
-		values(@OwnerGuid, -- romijeni na radnom
+		values(@OwnerGuid, 
 		GETDATE(), @Owner)
 
 		select @OwnerId = id from ApartmentOwner 
 		where Name = @Owner	
 	end
 
-	/*declare @ApartmentId int
-	SELECT @ApartmentId = IsNull(MAX(ID),0) FROM AspNetUsers*/
-
-	insert into Apartment(Guid, CreatedAt, OwnerId, TypeId, StatusId, CityId, Address, Name,
-	Price, MaxAdults, MaxChildren, TotalRooms, BeachDistance, NameEng)
-	values( @guid, GETDATE(), @OwnerId, 999, @StatusId, @CityId, @Address, @Name,
-	@Price, @MaxAdults, @MaxChildren, @TotalRooms, @BeachDistance, 'Default')
+	if not exists (select * from Apartment where Name = @Name and CityId = @CityId and BeachDistance = @BeachDistance)
+		begin 
+			insert into Apartment(Guid, CreatedAt, OwnerId, TypeId, StatusId, CityId, Address, Name,
+			Price, MaxAdults, MaxChildren, TotalRooms, BeachDistance, NameEng)
+			values( @guid, GETDATE(), @OwnerId, 999, @StatusId, @CityId, @Address, @Name,
+			@Price, @MaxAdults, @MaxChildren, @TotalRooms, @BeachDistance, 'Default')
+			select 1 as 'Succsess'
+		end
+	else
+		begin
+			select 0 as 'Succsess'
+		end
 END
 go
 
@@ -356,7 +361,7 @@ go*/
 --select * from dbo.funcLoadAllReservationsForApartment(3)
 
 
-alter proc AddReservationToApartment
+create proc AddReservationToApartment
 	@Guid uniqueidentifier,
 	@username nvarchar(250),
 	@Email nvarchar(250),
@@ -368,7 +373,8 @@ begin
 	declare @userid int
 	select @userid = id from AspNetUsers where UserName = @username
 
-	if not exists (select * from ApartmentReservation where (UserName = @username or UserId = @userid) and Details = @details)
+	if not exists (select * from ApartmentReservation
+	where /*(UserName = @username or UserId = @userid) and*/ Details = @details and ApartmentId = @apartID)
 		begin
 			if @userid is not null
 				begin
@@ -400,7 +406,7 @@ begin
 end
 go
 
-alter proc SetReserved
+create proc SetReserved
 	@apartID int
 as
 begin
