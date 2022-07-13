@@ -11,6 +11,8 @@ namespace MVC_Apartmani.Controllers
     {
         private const string ASC = "Asc";
         private const string DESC = "Desc";
+        private const string NAME = "Name";
+        private const string PRICE = "Price";
         private static IEnumerable<Lib.Models.Apartment> _displayedApartments;
         //private SortedList<Lib.Models.Apartment, Lib.Models.Apartment> _displayedApartments;
 
@@ -64,23 +66,24 @@ namespace MVC_Apartmani.Controllers
             return jsonResult;
         }
 
-        public ActionResult SortApartments(string price, string name)
+        public ActionResult SortApartments(string valueTosort, string sortType)
         {
             if (_displayedApartments == null)
             {
                 _displayedApartments = (List<Lib.Models.Apartment>)Repo.LoadAllApartments();
             }
-            if (string.IsNullOrEmpty(price) && string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(valueTosort) && string.IsNullOrEmpty(sortType) ||
+                string.IsNullOrEmpty(valueTosort) || string.IsNullOrEmpty(sortType))
             {
-                _displayedApartments.ToList().Sort((a, b) => a.ID.CompareTo(b.ID));
+                _displayedApartments = _displayedApartments.OrderBy(a => a.ID);
             }
-            else if (string.IsNullOrEmpty(price))
+            else if (valueTosort == NAME)
             {
-                SortDisplayedApartmentsByName(name);
+                SortDisplayedApartmentsByName(sortType);
             }
-            else if (string.IsNullOrEmpty(name))
+            else if (valueTosort == PRICE)
             {
-                SortDisplayedApartmentsByPrice(price);
+                SortDisplayedApartmentsByPrice(sortType);
             }
 
             var jsonResult = Json(_displayedApartments, JsonRequestBehavior.AllowGet);
@@ -89,27 +92,27 @@ namespace MVC_Apartmani.Controllers
             return jsonResult;
         }
 
-        private void SortDisplayedApartmentsByName(string name)
+        private void SortDisplayedApartmentsByName(string sortType)
         {
-            if (name == ASC)
+            if (sortType == ASC)
             {
-                _displayedApartments.OrderBy(a => a.Name); //ToList().Sort((a, b) => a.Name.CompareTo(b.Name)); 
+                _displayedApartments = _displayedApartments.OrderBy(a => a.Name); //ToList().Sort((a, b) => a.Name.CompareTo(b.Name)); 
             }
-            else if (name == DESC)
+            else if (sortType == DESC)
             {
-                _displayedApartments.OrderByDescending(a => a.Name); //ToList().Sort((a, b) => -a.Name.First().CompareTo(b.Name.First()));
+                _displayedApartments = _displayedApartments.OrderByDescending(a => a.Name); //ToList().Sort((a, b) => -a.Name.First().CompareTo(b.Name.First()));
             }
         }
 
-        private void SortDisplayedApartmentsByPrice(string price)
+        private void SortDisplayedApartmentsByPrice(string sortType)
         {
-            if (price == ASC)
+            if (sortType == ASC)
             {
-                _displayedApartments.OrderBy(a => a.Price); //ToList().Sort((a, b) => a.Price.CompareTo(b.Price));
+                _displayedApartments = _displayedApartments.OrderBy(a => a.Price); //ToList().Sort((a, b) => a.Price.CompareTo(b.Price));
             }
-            else if (price == DESC)
+            else if (sortType == DESC)
             {
-                _displayedApartments.OrderByDescending(a => a.Price); //ToList().Sort((a, b) => -a.Price.CompareTo(b.Price));
+                _displayedApartments = _displayedApartments.OrderByDescending(a => a.Price); //ToList().Sort((a, b) => -a.Price.CompareTo(b.Price));
             }
         }
     }

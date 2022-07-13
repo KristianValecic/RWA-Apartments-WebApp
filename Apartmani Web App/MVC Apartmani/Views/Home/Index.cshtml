@@ -9,13 +9,13 @@
         items: Model.Cities,
         dataTextField: "Name",
         dataValueField: "Name"
-        );
+    );
 
     SelectList ddlStatuses = new SelectList(
         items: Model.Statuses,
         dataTextField: "NameEng",
         dataValueField: "NameEng"
-        );
+    );
 
     SelectList ddlSortOptions = new SelectList(
         items: new List<SelectListItem> {
@@ -24,7 +24,16 @@
         },
         dataTextField: "Value",
         dataValueField: "Value"
-        );
+    );
+    
+    SelectList ddlValueSortOptions = new SelectList(
+        items: new List<SelectListItem> {
+            new SelectListItem{ Value = "Price"},
+            new SelectListItem{ Value = "Name"}
+        },
+        dataTextField: "Value",
+        dataValueField: "Value"
+    );
 
 }
 
@@ -111,25 +120,25 @@
         <h3>Results</h3>
         <div class="d-flex flex-wrap ms-3">
             <div class="">
-                <label class="p-1">Sort by Price</label>
+                <label class="p-1">Sort by</label>
             </div>
             <div class="">
                 @Html.DropDownList(
                     optionLabel: "",
-                    selectList: ddlSortOptions,
-                    name: "SortPrice",
+                    selectList: ddlValueSortOptions,
+                    name: "SortByValue",//SortPrice
                     htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
         <div class="d-flex flex-wrap ms-3">
-            <div class="">
-                <label class="p-1">Sort by name</label>
-            </div>
+            @*<div class="">
+            <label class="p-1">Sort by name</label>
+        </div>*@
             <div class="">
                 @Html.DropDownList(
                     optionLabel: "",
                     selectList: ddlSortOptions,
-                    name: "SortName",
+                    name: "SortType", //SortName
                     htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
@@ -251,15 +260,27 @@
                 })
             };
 
-        $("#SortPrice").change(function () {
-            $('select[name="SortName"] option:selected').attr("selected", null);
-            $('select[name="SortName"] option[value=""]').attr("selected", "selected");
-            SortApartments
+        //$("#SortPrice").change(function () {
+        //    $('select[name="SortName"] option:selected').attr("selected", false);
+        //    $('select[name="SortName"] option[value=""]').attr("selected", "selected");
+        //    SortApartments;
+        //});
+        //$("#SortName").change(function () {
+        //    $('select[name="SortPrice"] option:selected').attr("selected", false);
+        //    $('select[name="SortPrice"] option[value=""]').attr("selected", "selected");
+        //    SortApartments;
+        //});
+
+        $("#SortByValue").change(function () {
+            console.log($("#SortType option:selected").text())
+            if ($("#SortType option:selected").text().trim()) {
+                SortApartments();
+            }
         });
-        $("#SortName").change(function () {
-            $('select[name="SortPrice"] option:selected').attr("selected", null);
-            $('select[name="SortPrice"] option[value=""]').attr("selected", "selected");
-            SortApartments
+        $("#SortType").change(function() {
+            if ($("#SortByValue option:selected").text().trim()) {
+                SortApartments();
+            }
         });
 
         function SortApartments() {
@@ -267,8 +288,8 @@
                     method: 'GET',
                     url: '@Url.Action(actionName: "SortApartments", controllerName:"Ajax")',
                     data: {
-                        price: $("#SortPrice").val(),
-                        name: $("#SortName").val()
+                        valueTosort: $("#SortByValue").val(),
+                        sortType: $("#SortType").val()
                     },
                     success: function (apartments) {
                         if (apartments != null) {
