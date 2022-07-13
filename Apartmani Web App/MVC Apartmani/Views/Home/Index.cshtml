@@ -179,7 +179,7 @@
         function showApartments(id){
             $.ajax({
                 method: 'GET',
-                url: '@Url.Action(actionName: "GetApartments", controllerName:"Ajax")',
+                url: '@Url.Action(actionName: "GetApartment", controllerName:"Ajax")',
                 data: { id },
                 success: function (apartments) {
                     if (apartments != null) {
@@ -226,6 +226,7 @@
                         rooms: $("#RoomNumber").val()
                     },
                     success: function (apartments) {
+                        console.log(apartments);
                         if (apartments != null) {
                             $("#Results").empty();
                             $("#Results").fadeIn(500);
@@ -250,8 +251,16 @@
                 })
             };
 
-        $("#SortPrice").change(SortApartments);
-        $("#SortName").change(SortApartments);
+        $("#SortPrice").change(function () {
+            $('select[name="SortName"] option:selected').attr("selected", null);
+            $('select[name="SortName"] option[value=""]').attr("selected", "selected");
+            SortApartments
+        });
+        $("#SortName").change(function () {
+            $('select[name="SortPrice"] option:selected').attr("selected", null);
+            $('select[name="SortPrice"] option[value=""]').attr("selected", "selected");
+            SortApartments
+        });
 
         function SortApartments() {
                 $.ajax({
@@ -285,6 +294,7 @@
                     },
                 })
             };
+
 
         function getDateFromJSON(jsonDate) {
             var startIndex = jsonDate.indexOf("(") + 1;

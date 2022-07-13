@@ -8,8 +8,6 @@
     gap: 12px;
 }
 
-
-
 #formAparts{
     width: 32%;
 }
@@ -25,12 +23,36 @@
     width: 100%;
     background-color: white;
     text-align: left;
-    /*max-height: 400px;*/
 }
 
-#tagsList{
+#tagsList {
+    /*margin-left: 15px;*/
     height: 200px;
-    border:1px solid silver;
+    border: 1px solid silver;
     border-radius: 4px;
     padding: 5px 20px;
+}
+
+#gallery a{
+    width: fit-content;
+}
+
+#star-rating-container {
+    /*border: 1px solid silver;*/
+    /*border-radius: 4px;*/
+    padding: 10px;
+    width: 640px;
+    display: flex;
+    /*background-color: aqua;*/
+}
+
+#star-rating {
+    padding:5px 20px;
+}
+
+#Contact-form {
+    /*border: 1px solid lightgrey;*/
+    /*background-color: whitesmoke;*/
+    border-radius: 4px;
+    padding: 10px;
 }

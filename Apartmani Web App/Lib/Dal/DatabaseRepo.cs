@@ -199,10 +199,11 @@ namespace Lib.Dal
                         BeachDistance = (int)row[nameof(Apartment.BeachDistance)],
                         MaxAdults = (int)row[nameof(Apartment.MaxAdults)],
                         MaxChildren = (int)row[nameof(Apartment.MaxChildren)],
-                        Pictures = loadImagesForAparment((int)row[nameof(Apartment.ID)])// NOVO
+                        //Stars = (int)row[nameof(Apartment.Stars)],
+                        Pictures = LoadImagesForAparment((int)row[nameof(Apartment.ID)])
                     });
             }
-            return aparts;
+          return aparts;
         }
 
 
@@ -259,10 +260,10 @@ namespace Lib.Dal
             return (int)row["Succsess"];
         }
 
-        public IList<Picture> loadImagesForAparment(int apartmentID)
+        public IList<Picture> LoadImagesForAparment(int apartmentID)
         {
             IList<Picture> paths = new List<Picture>();
-            var tblUsers = SqlHelper.ExecuteDataset(APARTMENTS_CS, nameof(loadImagesForAparment), apartmentID).Tables[0];
+            var tblUsers = SqlHelper.ExecuteDataset(APARTMENTS_CS, nameof(LoadImagesForAparment), apartmentID).Tables[0];
 
             foreach (DataRow row in tblUsers.Rows)
             {
@@ -431,6 +432,32 @@ namespace Lib.Dal
                 Email = row[nameof(User.Email)].ToString(),
                 Address = row[nameof(User.Address)].ToString()
             };
+        }
+
+        public void RateApartment(int rate, int apartID, int userID)
+        {
+            var tblReviews = SqlHelper.ExecuteNonQuery(APARTMENTS_CS, nameof(RateApartment), Guid.NewGuid(), rate, apartID, userID);//.Tables[0];
+
+            //if (tblReviews.Rows.Count == 0)
+            //{
+            //    return 0;
+            //}
+
+            //DataRow row = tblReviews.Rows[0];
+            //return (int)row["Succsess"];
+        }
+
+        public int GetApartmentRatingFromUser(int apartID, int userID)
+        {
+            var tblReviews = SqlHelper.ExecuteDataset(APARTMENTS_CS, nameof(GetApartmentRatingFromUser), apartID, userID).Tables[0];
+
+            if (tblReviews.Rows.Count == 0)
+            {
+                return 0;
+            }
+
+            DataRow row = tblReviews.Rows[tblReviews.Rows.Count-1];
+            return (int)row[nameof(Apartment.Stars)];
         }
     }
 }

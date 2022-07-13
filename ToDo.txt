@@ -4,23 +4,19 @@ popravi da se ne moze unest isti apart koji posotoji!!!!!
 mozda dodati: kada se stavi na slobodno onda se izbrisu rezervacije.
 ISTESTIRAJ WEB.FORMS OPET RADI LI SVE
 ---------------------------------------------------------------------
-POPRAVI: sort liste
+NAPRAVITI DA SE UCITAJU OCJENE U APARTU AKO I IMA (procedura, model, ispis to treba prilagodit da cuva rating)
+POPRAVI: Rating se mora prikazati samo logiranom useru, sort liste
 
 Mozda: provjeru za unos datuma za rezervaciju 
 i provjeru ako je taj datum danas onda je occupied(ideja: na svaki load provjeri datum i ako treba promijeni)
 
 ajax stvari i spreamjne u cookie postavka za search
 
-popravi sirinu slike
-
 spremanje u cookie kako je korisnik filtrirao prije
 
 COOKIE:https://stackoverflow.com/questions/9158225/using-cookie-in-asp-net-mvc-c-sharp
 
 User dio  MVC
-
-5. Pretraživanje apartmana - filtriranje je prema karakteristikama: broj soba, broj
-mjesta za odrasle i broj mjesta za djecu; po želji omogućiti i dodatne uvjete
 
 6. Pretraživanje apartmana - sortiranje neka bude po ili default (po ID) ili
 uzlazno/silazno po cijeni, tako da se svodi na 3 odabira (nema/uzlazno/silazno).

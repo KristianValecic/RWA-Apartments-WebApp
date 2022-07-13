@@ -14,7 +14,7 @@ namespace MVC_Apartmani.Models.ViewModels
         [Required(ErrorMessage = "Name is required")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Krivi Email")]
+        [EmailAddress(ErrorMessage = "Wrong Email")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Addres is required")]
         public string Address { get; set; }

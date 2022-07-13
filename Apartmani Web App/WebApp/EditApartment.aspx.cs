@@ -37,7 +37,7 @@ namespace WebApp
 
         private void LoadRepeater()
         {
-            rptrImages.DataSource = ((IRepo)Application["database"]).loadImagesForAparment(((Apartment)Session["apartment"]).ID);
+            rptrImages.DataSource = ((IRepo)Application["database"]).LoadImagesForAparment(((Apartment)Session["apartment"]).ID);
             rptrImages.DataBind();
             //if (rptrImages.Controls.Count == 0)
             //{

@@ -29,7 +29,7 @@ namespace MVC_Apartmani.Controllers
             return Json(find, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetApartments(int id)
+        public ActionResult GetApartment(int id)
         {
             return Json(Repo.GetApartmentById(id), JsonRequestBehavior.AllowGet);
         }
@@ -37,22 +37,16 @@ namespace MVC_Apartmani.Controllers
         public ActionResult GetSingleApartment(int id)
         {
             Lib.Models.Apartment apart = Repo.GetApartmentById(id);
-            apart.Pictures = Repo.loadImagesForAparment(id);
+            apart.Pictures = Repo.LoadImagesForAparment(id);
             return PartialView("_ApartmentContainer", apart);
         }
 
         public ActionResult FilterApartments(string city, string status, int? children, int? adults, int? rooms)
         {
-            //List<Lib.Models.Apartment> data = (List<Lib.Models.Apartment>)Repo.LoadAllApartments();
-            _displayedApartments = (IEnumerable<Lib.Models.Apartment>)Repo.LoadAllApartments();
-            if (string.IsNullOrEmpty(city) && string.IsNullOrEmpty(status) && children == null && adults == null && rooms == null)
-            {
-                //data.Sort((a, b) => a.ID.CompareTo(b.ID));
-                _displayedApartments.OrderBy(a => a.ID);
-                return Json(_displayedApartments, JsonRequestBehavior.AllowGet);
-            }
+            List<Lib.Models.Apartment> data = (List<Lib.Models.Apartment>)Repo.LoadAllApartments();
 
-            _displayedApartments = _displayedApartments.Where(
+
+            _displayedApartments = data.Where(
                 a => (string.IsNullOrEmpty(city)) ? true : a.City.ToLower().Equals(city.ToLower())
             ).Where(
                  a => (string.IsNullOrEmpty(status)) ? true : a.Status.ToLower().Equals(status.ToLower())
@@ -62,9 +56,12 @@ namespace MVC_Apartmani.Controllers
                  a => (adults == null) ? true : a.MaxAdults.Equals(adults)
             ).Where(
                  a => (rooms == null) ? true : a.TotalRooms.Equals(rooms)
-            );
+            ).OrderBy(a => a.ID);
 
-            return Json(_displayedApartments, JsonRequestBehavior.AllowGet);
+            var jsonResult = Json(_displayedApartments, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+
+            return jsonResult;
         }
 
         public ActionResult SortApartments(string price, string name)
@@ -75,7 +72,7 @@ namespace MVC_Apartmani.Controllers
             }
             if (string.IsNullOrEmpty(price) && string.IsNullOrEmpty(name))
             {
-                _displayedApartments = _displayedApartments.OrderBy(a => a.ID);
+                _displayedApartments.ToList().Sort((a, b) => a.ID.CompareTo(b.ID));
             }
             else if (string.IsNullOrEmpty(price))
             {
@@ -86,18 +83,21 @@ namespace MVC_Apartmani.Controllers
                 SortDisplayedApartmentsByPrice(price);
             }
 
-            return Json(_displayedApartments, JsonRequestBehavior.AllowGet);
+            var jsonResult = Json(_displayedApartments, JsonRequestBehavior.AllowGet);
+            jsonResult.MaxJsonLength = int.MaxValue;
+
+            return jsonResult;
         }
 
         private void SortDisplayedApartmentsByName(string name)
         {
             if (name == ASC)
             {
-                _displayedApartments = _displayedApartments.OrderBy(a => a.Name).ThenBy(a => a.Name); //ToList().Sort((a, b) => a.Name.CompareTo(b.Name)); 
+                _displayedApartments.OrderBy(a => a.Name); //ToList().Sort((a, b) => a.Name.CompareTo(b.Name)); 
             }
             else if (name == DESC)
             {
-                _displayedApartments = _displayedApartments.OrderByDescending(a => a.Name); //ToList().Sort((a, b) => -a.Name.First().CompareTo(b.Name.First()));
+                _displayedApartments.OrderByDescending(a => a.Name); //ToList().Sort((a, b) => -a.Name.First().CompareTo(b.Name.First()));
             }
         }
 
@@ -105,11 +105,11 @@ namespace MVC_Apartmani.Controllers
         {
             if (price == ASC)
             {
-                _displayedApartments = _displayedApartments.OrderBy(a => a.Price); //ToList().Sort((a, b) => a.Price.CompareTo(b.Price));
+                _displayedApartments.OrderBy(a => a.Price); //ToList().Sort((a, b) => a.Price.CompareTo(b.Price));
             }
             else if (price == DESC)
             {
-                _displayedApartments = _displayedApartments.OrderByDescending(a => a.Price); //ToList().Sort((a, b) => -a.Price.CompareTo(b.Price));
+                _displayedApartments.OrderByDescending(a => a.Price); //ToList().Sort((a, b) => -a.Price.CompareTo(b.Price));
             }
         }
     }

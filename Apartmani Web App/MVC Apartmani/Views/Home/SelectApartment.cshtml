@@ -71,7 +71,7 @@
                     <ul id="tagsList" class="overflow-auto ps-4">
                         @if (LoadTagsForApartment.Count == 0)
                         {
-                            <p>No tags for this apartment yet</p>
+                            <li>No tags for this apartment yet</li>
                         }
                         else
                         {
@@ -82,10 +82,29 @@
                         }
                     </ul>
                 </div>
+                @if (user != null)
+                {
+                    <div id="star-rating-container" class="mb-3">
+                        @if (Model.Apart.Stars > 0)
+                        {
+                            <p>You rated this apartment with a <b>@Model.Apart.Stars</b>, want to change that rating?</p>
+                        }
+                        else
+                        {
+                            <p>You havent rated this apartment yet.</p>
+                        }
+                        <div id="star-rating">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                <input id="Star_@i" type="radio" class="rating" value="@i" />
+                            }
+                        </div>
+                    </div>
+                }
             </div>
 
-            <div class="col">
-                <div class="row">
+            <div   class="col">
+                <div id="Contact-form" class="row">
                     <h1>Contact</h1>
                     @using (Html.BeginForm("SelectApartment", "Home", null, FormMethod.Post, new { role = "form" }))
                     {
@@ -189,13 +208,8 @@
                             }
                         </div>
                         <div class="row p-2">
-                            <div class="col-10"></div>
-                            <div class="col-2">
-                                <button type="submit" class="btn btn-primary">Reserve</button>
-                            </div>
-                           
                             @Html.RecaptchaWidget()
-                          
+
                             @if (!ViewData.ModelState.IsValid)
                             {
                                 <div class="alert alert-danger">
@@ -203,12 +217,17 @@
                                     @Html.ValidationSummary()
                                 </div>
                             }
+                            <div class="col-10"></div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary">Reserve</button>
+                            </div>
+
                         </div>
                     }
                 </div>
             </div>
             <div>
-                @Html.ActionLink("Back to List", "Index", htmlAttributes: new { @class = "btn btn-secondary" }, routeValues: null)
+                @Html.ActionLink("Back to List", "Index", htmlAttributes: new { @class = "btn btn-secondary float-end" }, routeValues: null)
             </div>
             <div class="row" id="gallery">
                 @if (Model.Apart.Pictures != null)
@@ -231,6 +250,23 @@
 @section scripts{
     <script>
         $(document).ready(function () {
+
+            $('#star-rating').rating(function (vote, event) {
+                $.ajax({
+                    url: '@Url.Action(actionName: "RateApartment", controllerName: "Ajax")',
+                    type: "POST",
+                    data: {
+                        rate: vote,
+                        apartID: @Model.Apart.ID
+                    },
+                    success:
+                        function() {
+                            $("#star-rating-container p b").empty();
+                            $("#star-rating-container p b").text(vote);
+                        }
+                });
+            });
+
             $('[data-fancybox="gallery"]').fancybox({
                 cyclic: true,
                 onUpdate: function () {

@@ -4,14 +4,14 @@
 {
     <button>
         <div class="p-2">
-            <div class="row">
+            @*<div class="row">
                 <p>* * * * *</p>
-            </div>
+            </div>*@
             <div class="row">
                 <div class="col">
                     @if (Model.RepresentativePicture != null)
                     {
-                        <img src="@Model.RepresentativePicture.Base64ForHtml" alt="representative apart img" style=" max-height: 220px;" />
+                        <img src="@Model.RepresentativePicture.Base64ForHtml" alt="representative apart img" style="max-width: 180px; max-height:220px;" />
                     }
                     @*@if (Model.Pictures != null)
                         {
@@ -27,7 +27,7 @@
                 <div class="col">
                     <h5><b>@Html.DisplayFor(model => model.Name)</b></h5>
                     <ul>
-                        <li>Grad:  @Html.DisplayFor(model => model.City)</li>
+                        <li>City:  @Html.DisplayFor(model => model.City)</li>
                         <li>Beach distance: @Html.DisplayFor(model => model.BeachDistance)</li>
                         <li>Rooms: @Html.DisplayFor(model => model.TotalRooms)</li>
                         <li>Max adults: @Html.DisplayFor(model => model.MaxAdults)</li>

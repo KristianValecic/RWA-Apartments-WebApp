@@ -23,6 +23,7 @@ namespace Lib.Models
         public int BeachDistance { get; set; }
         public int MaxAdults { get; set; }
         public int MaxChildren { get; set; }
+        public int Stars { get; set; }
         public int totalPlacesCount
         {
             get => MaxChildren + MaxAdults;
@@ -46,5 +47,8 @@ namespace Lib.Models
 
         public override bool Equals(object obj)
         => obj is Apartment other && other.Name.Equals(Name) && other.Price.Equals(Price) && other.BeachDistance.Equals(BeachDistance);
+
+        public override int GetHashCode()
+        => GUID.GetHashCode();
     }
 }

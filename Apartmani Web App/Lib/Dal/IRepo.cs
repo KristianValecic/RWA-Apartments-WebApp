@@ -25,7 +25,7 @@ namespace Lib.Dal
         void AddApartment(Apartment apartment);
         IList<Status> LoadAllStatuses();
         IList<Tag> LoadTagsForApartment(int apartID);
-        IList<Picture> loadImagesForAparment(int apartmentID);
+        IList<Picture> LoadImagesForAparment(int apartmentID);
         void AddImageForAparment(Picture p, int apartID);
         void RemoveTagFromApartment(int tagID, int apartmentID);
         int AddTagToApartment(int tagID, int apartmentID);
@@ -37,5 +37,7 @@ namespace Lib.Dal
         Apartment GetApartmentById(int apartmentID);
         Apartment GetApartment(string name, string owner, string address);
         dynamic GetUserById(string userID);
+        void RateApartment(int rate, int apartID, int userID);
+        int GetApartmentRatingFromUser(int apartID, int userID);
     }
 }

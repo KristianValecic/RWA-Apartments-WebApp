@@ -55,9 +55,19 @@ namespace MVC_Apartmani.Models
             return _repo.LoadTagsForApartment(apartmentID);
         }
 
-        internal static IList<Lib.Models.Picture> loadImagesForAparment(int apartmentID)
+        internal static void RateApartment(int rate, int apartID, int userID)
         {
-            return _repo.loadImagesForAparment(apartmentID);
+            _repo.RateApartment(rate, apartID, userID);
+        }
+
+        internal static IList<Lib.Models.Picture> LoadImagesForAparment(int apartmentID)
+        {
+            return _repo.LoadImagesForAparment(apartmentID);
+        }
+
+        internal static void GetApartmentRating(object rate, int apartID, int iD)
+        {
+            throw new NotImplementedException();
         }
 
         internal static IList<Lib.Models.Status> LoadAllStatuses()
@@ -77,6 +87,12 @@ namespace MVC_Apartmani.Models
         internal static IList<Lib.Models.City> LoadAllCities()
         {
             return _repo.LoadAllCities();
+        }
+
+        internal static int GetApartmentRatingFromUser(int apartID, int userID)
+        {
+            return _repo.GetApartmentRatingFromUser(apartID, userID);
+
         }
     }
 }

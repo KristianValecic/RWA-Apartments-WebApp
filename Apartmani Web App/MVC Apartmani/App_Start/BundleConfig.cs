@@ -13,7 +13,8 @@ namespace MVC_Apartmani.App_Start
             bundels.Add(new StyleBundle("~/Content").Include(
                 "~/Content/bootstrap.min.css",
                 "~/Content/jquery.fancybox.css",
-                "~/Content/jquery-ui.css"
+                "~/Content/jquery-ui.css",
+                "~/Content/rating.css"
             ));
 
             bundels.Add(new ScriptBundle("~/Scripts").Include(
@@ -24,7 +25,8 @@ namespace MVC_Apartmani.App_Start
                 "~/Scripts/jquery.fancybox.js",
                 "~/Scripts/jquery.fancybox-buttons.js",
                 "~/Scripts/jquery.fancybox-media.js",
-                "~/Scripts/jquery.fancybox-thumbs.js"
+                "~/Scripts/jquery.fancybox-thumbs.js",
+                "~/Scripts/rating.js"
             ));
         }
     }

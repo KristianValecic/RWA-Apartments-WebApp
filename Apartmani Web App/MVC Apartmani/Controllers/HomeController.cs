@@ -152,13 +152,15 @@ namespace MVC_Apartmani.Controllers
         //[IsAuthorized]
         public ActionResult SelectApartment(int ID)
         {
+            Apartment apart = Repo.GetApartmentById(ID);
+
             if (User.Identity.IsAuthenticated)
             {
                 ViewBag.User = Repo.GetUserById(User.Identity.GetUserId());
+                apart.Stars = Repo.GetApartmentRatingFromUser(ID, int.Parse(User.Identity.GetUserId()));
             }
             
-            Apartment apart = Repo.GetApartmentById(ID);
-            apart.Pictures = Repo.loadImagesForAparment(ID);
+            apart.Pictures = Repo.LoadImagesForAparment(ID);
             ReservationViewModel model = new ReservationViewModel
             {
                 Apart = apart
@@ -171,7 +173,7 @@ namespace MVC_Apartmani.Controllers
         public ActionResult SelectApartment(ReservationViewModel model)
         {
             Apartment apart = Repo.GetApartmentById(model.Apart.ID);
-            apart.Pictures = Repo.loadImagesForAparment(model.Apart.ID);
+            apart.Pictures = Repo.LoadImagesForAparment(model.Apart.ID);
             model.Apart = apart;
 
             if (!User.Identity.IsAuthenticated)

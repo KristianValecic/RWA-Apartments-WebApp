@@ -133,6 +133,7 @@ AS
 BEGIN
 	select a.Id, a.Guid, a.name, c.Name as 'city', o.Name as 'owner', Price,
 	a.MaxAdults, a.MaxChildren, a.TotalRooms, s.NameEng as 'Status', a.Address, a.BeachDistance
+	--ISNULL(r.Stars, 0) as 'stars'
 	from Apartment as a
 	inner join City as c on
 	a.CityId = c.Id
@@ -140,6 +141,8 @@ BEGIN
 	a.OwnerId = o.Id
 	inner join ApartmentStatus as s on
 	a.StatusId = s.Id
+	/*left join ApartmentReview as r on
+	r.ApartmentId = a.Id*/
 	where a.DeletedAt is null
 END
 go
@@ -451,6 +454,46 @@ begin
 	inner join ApartmentStatus as s on
 	a.StatusId = s.Id
 	where a.id = @id
+end
+go
+
+create proc RateApartment
+	@guid uniqueidentifier,
+	@rate int,
+	@apartID int,
+	@userID int
+as
+begin
+	if not exists (select * from ApartmentReview where UserId = @userID and ApartmentId = @apartID)
+		begin
+			insert into ApartmentReview (Guid, CreatedAt, ApartmentId, UserId, Details, Stars)
+			values(@guid, GETDATE(), @apartID, @userID, '', @rate)
+			--select 1 as 'Succsess'
+		end
+	else
+		begin
+			delete from ApartmentReview where UserId = @userID and ApartmentId = @apartID
+
+			insert into ApartmentReview (Guid, CreatedAt, ApartmentId, UserId, Details, Stars)
+			values(@guid, GETDATE(), @apartID, @userID, '', @rate)
+			--select 0 as 'Succsess'
+		end
+
+
+
+	--insert into ApartmentReview (Guid, CreatedAt, ApartmentId, UserId, Details, Stars)
+	--values(@guid, GETDATE(), @apartID, @userID, '', @rate)
+end
+go
+
+
+create proc GetApartmentRatingFromUser
+	@apartID int,
+	@userID int
+as
+begin
+	select * from ApartmentReview
+	where UserId = @userID and ApartmentId = @apartID
 end
 go
 
