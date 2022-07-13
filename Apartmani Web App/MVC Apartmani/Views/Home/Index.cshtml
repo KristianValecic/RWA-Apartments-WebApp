@@ -8,13 +8,15 @@
     SelectList ddlCities = new SelectList(
         items: Model.Cities,
         dataTextField: "Name",
-        dataValueField: "Name"
+        dataValueField: "Name",
+        selectedValue: TempData["City"]
     );
 
     SelectList ddlStatuses = new SelectList(
         items: Model.Statuses,
         dataTextField: "NameEng",
-        dataValueField: "NameEng"
+        dataValueField: "NameEng",
+        selectedValue: TempData["Status"]
     );
 
     SelectList ddlSortOptions = new SelectList(
@@ -51,7 +53,8 @@
                     optionLabel: "",
                     selectList: ddlCities,
                     name: "IDDrzava",
-                    htmlAttributes: new { @class = "form-control" })
+                    htmlAttributes: new { @class = "form-control" }
+                    )
             </div>
         </div>
     </div>
@@ -77,7 +80,10 @@
                 <label class="p-1">Children:</label>
             </div>
             <div class="col-6">
-                @Html.TextBox(name: "ChildrenNumber", htmlAttributes: new { @class = "form-control", type = "number" }, value: null)
+                @Html.TextBox(name: "ChildrenNumber", htmlAttributes: new { @class = "form-control",
+                @Value = TempData["Children"] == null ? "" : TempData["Children"].ToString(),
+                type = "number" }, value: null)
+                @*@Html.TextBoxFor()*@
             </div>
         </div>
     </div>
@@ -87,7 +93,8 @@
                 <label class="p-1">Adults:</label>
             </div>
             <div class="col-6">
-                @Html.TextBox(name: "AdultNumber", htmlAttributes: new { @class = "form-control", type = "number" }, value: null)
+                @Html.TextBox(name: "AdultNumber", htmlAttributes: new { @class = "form-control", type = "number", 
+                @Value = TempData["Adults"] == null ? "" : TempData["Adults"].ToString() }, value: null)
             </div>
         </div>
     </div>
@@ -97,7 +104,8 @@
                 <label class="p-1">Rooms:</label>
             </div>
             <div class="col-6">
-                @Html.TextBox(name: "RoomNumber", htmlAttributes: new { @class = "form-control", type = "number" }, value: null)
+                @Html.TextBox(name: "RoomNumber", htmlAttributes: new { @class = "form-control", type = "number",
+               @Value = TempData["Rooms"] == null ? "" : TempData["Rooms"].ToString() }, value: null)
             </div>
         </div>
     </div>
@@ -149,7 +157,6 @@
 </div>
 
 <div id="homeApartContainer">
-
     @foreach (var item in Model.Apartments)
     {
         @Html.Partial(partialViewName: "_ApartmentContainer", model: item)
@@ -217,11 +224,26 @@
         $("#btnSearch").click(FilterApartments);
         //$("#btnSearch").click(showApartments());
 
-        $("#IDDrzava").change(FilterApartments);
-        $("#IDStatus").change(FilterApartments);
-        $("#ChildrenNumber").change(FilterApartments);
-        $("#AdultNumber").change(FilterApartments);
-        $("#RoomNumber").change(FilterApartments);
+        $("#IDDrzava").change(function () {
+            FilterApartments();
+            SortApartments();
+        });
+        $("#IDStatus").change(function () {
+            FilterApartments();
+            SortApartments();
+        });
+        $("#ChildrenNumber").change(function () {
+            FilterApartments();
+            SortApartments();
+        });
+        $("#AdultNumber").change(function () {
+            FilterApartments();
+            SortApartments();
+        });
+        $("#RoomNumber").change(function () {
+            FilterApartments();
+            SortApartments();
+        });
 
         function FilterApartments() {
                 $.ajax({
@@ -316,6 +338,22 @@
                 })
             };
 
+        function SortApartments() {
+                $.ajax({
+                    method: 'POST',
+                    url: '@Url.Action(actionName: "WriteCookie", controllerName:"Ajax")',
+                    data: {
+                        city: $("#IDDrzava").val(),
+                        status: $("#IDStatus").val(),
+                        children: $("#ChildrenNumber").val(),
+                        adults: $("#AdultNumber").val(),
+                        rooms: $("#RoomNumber").val()
+                    },
+                    success: function (data) {
+                        console.log(data);
+                    }
+                })
+            };
 
         function getDateFromJSON(jsonDate) {
             var startIndex = jsonDate.indexOf("(") + 1;

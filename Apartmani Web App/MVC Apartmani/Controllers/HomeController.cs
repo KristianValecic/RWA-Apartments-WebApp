@@ -53,6 +53,18 @@ namespace MVC_Apartmani.Controllers
         {
             //List<Apartment> model = Repo.LoadAllApartments().ToList();
 
+            if (HttpContext.Request.Cookies["search"] != null && User.Identity.IsAuthenticated &&
+                HttpContext.Request.Cookies["search"].Values["User"] == User.Identity.GetUserId())
+            {
+                HttpCookie cookie = Request.Cookies["search"];
+
+                TempData["City"] = cookie.Values["City"];
+                TempData["Status"] = cookie.Values["Status"];
+                TempData["Children"] = cookie.Values["Children"];
+                TempData["Adults"] = cookie.Values["Adults"];
+                TempData["Rooms"] = cookie.Values["Rooms"];
+            }
+
             IndexApartmentViewModel model = new IndexApartmentViewModel
             {
                 Apartments = Repo.LoadAllApartments().ToList(),
@@ -167,6 +179,8 @@ namespace MVC_Apartmani.Controllers
             };
             return View(model);
         }
+
+
 
         [HttpPost]
         [AllowAnonymous]

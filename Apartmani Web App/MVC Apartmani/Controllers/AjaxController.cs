@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace MVC_Apartmani.Controllers
 {
@@ -114,5 +115,28 @@ namespace MVC_Apartmani.Controllers
                 _displayedApartments = _displayedApartments.OrderByDescending(a => a.Price); 
             }
         }
+
+        [HttpPost]
+        public ActionResult WriteCookie(string city, string status, int? children, int? adults, int? rooms)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                HttpCookie cookie = new HttpCookie("search");
+                cookie.Expires = DateTime.Now.AddDays(3);
+
+                cookie.Values["User"] = User.Identity.GetUserId();
+                cookie.Values["City"] = city;
+                cookie.Values["Status"] = status;
+                cookie.Values["Children"] = children.ToString();
+                cookie.Values["Adults"] = adults.ToString();
+                cookie.Values["Rooms"] = rooms.ToString();
+
+                HttpContext.Response.Cookies.Remove("search");
+                HttpContext.Response.SetCookie(cookie); 
+            }
+
+            return RedirectToAction("Index");
+        }
     }
+
 }
